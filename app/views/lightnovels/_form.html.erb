@@ -1,0 +1,48 @@
+<%= form_for(@lightnovel) do |f| %>
+  <%= render "shared/error_messages", :target => @lightnovel %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :total_number_of_chapters %><br>
+    <%= f.number_field :total_number_of_chapters %>
+  </div>
+  <div class="field">
+    <%= f.label :raws_url %><br>
+    <%= f.text_field :raws_url %>
+  </div>  
+  <div class="field">
+    <%= f.label :is_translated %> <%= f.check_box  :is_translated %>
+  </div>
+  <div id="translated" style="display:none;">
+    <div class="field">
+      <%= f.label :translated_chapters %><br>
+      <%= f.number_field :translated_chapters %>
+    </div>
+    <div class="field">
+      <%= f.label :translated_url %><br>
+      <%= f.text_field :translated_url %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<% end %>
+
+<script type="text/javascript">
+  var checkbox = document.getElementById('lightnovel_is_translated');
+  var details_div = document.getElementById('translated');
+  checkbox.onchange = function() {
+     if(this.checked) {
+       details_div.style['display'] = 'block';
+     } else {
+       details_div.style['display'] = 'none';
+     }
+  };
+</script>

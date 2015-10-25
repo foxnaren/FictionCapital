@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @lightnovel.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @lightnovel.description %>
+</p>
+
+<p>
+  <strong>Total Number Of Chapter:</strong>
+  <%= @lightnovel.total_number_of_chapters %>
+</p>
+
+<p>
+	<strong>Homepage/Raws: </strong>
+	<%= link_to 'Link', extlink(@lightnovel.raws_url) %>
+</p>
+
+<% logger.debug ">>>lightnovel#show>>>>>>>#{@lightnovel.is_translated}<<<<<<<<<<<<<" %>
+
+<% if @lightnovel.is_translated == true %>
+	<p>
+  		<strong>Translated Chapters:</strong>
+  		<%= @lightnovel.translated_chapters %>
+	</p>
+	<p>
+  		<strong>Translated Chapters:</strong>
+  		<%= link_to 'Link', extlink(@lightnovel.translated_url) %>
+	</p>
+<% end %>	
+
+<%= link_to 'Edit', edit_lightnovel_path(@lightnovel) %> |
+<%= link_to 'Back', lightnovels_path %>
