@@ -35,3 +35,26 @@
 
 <%= link_to 'Edit', edit_lightnovel_path(@lightnovel) %> |
 <%= link_to 'Back', lightnovels_path %>
+
+<table>
+  <thead>
+      <tr>
+        <th>Chapter Number</th>
+        <th>Chapter Name</th>
+        <th>Raws Link</th>
+        <th>Translated Link</th>
+        <th colspan="3"></th>
+      </tr>
+   </thead>
+   <tbody>
+      <% @chapters.each do |chapter| %>
+          <tr>
+            <td><%= chapter.chapter_number %></td>
+            <td><%= chapter.chapter_name %></td>
+            <td><%= link_to 'Raws', extlink(chapter.raws_url) %></td>
+            <td><%= link_to 'Translated', extlink(chapter.translated_url) %></td>
+          </tr>
+      <% end %>
+    </tbody>
+</table>
+
