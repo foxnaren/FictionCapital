@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  root 'lightnovels#index'
   resources :examples
   resources :lightnovels
   # The priority is based upon order of creation: first created -> highest priority.

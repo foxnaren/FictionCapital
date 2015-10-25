@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024160909) do
+ActiveRecord::Schema.define(version: 20151025132459) do
+
+  create_table "chapters", force: :cascade do |t|
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "lightnovel_id",                       null: false
+    t.string   "chapter_name",                        null: false
+    t.integer  "chapter_number",                      null: false
+    t.integer  "volume",                              null: false
+    t.integer  "volume_chapter_number",               null: false
+    t.string   "raws_url",                            null: false
+    t.string   "translated_url",        default: "0"
+  end
+
+  add_index "chapters", ["lightnovel_id"], name: "index_chapters_on_lightnovel_id"
 
   create_table "examples", force: :cascade do |t|
     t.string   "name"
