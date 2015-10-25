@@ -7,6 +7,8 @@ class Lightnovel < ActiveRecord::Base
 	validates :translated_chapters, presence: true, if: :translated?
 	validates :translated_url, presence: true, if: :translated?
 	
+	has_many :chapters
+
 	def slug
         name.downcase.gsub(" ", "-")
     end
