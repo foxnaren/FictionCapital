@@ -1,13 +1,11 @@
 class Lightnovel < ActiveRecord::Base
 	validates :name, presence: true, uniqueness: true
 	validates :description, presence: true
-	validates :total_number_of_chapters, presence: true
-	validates :raws_url, presence: true
+	validates :home_url, presence: true
 	#validates :is_translated, presence: true
-	validates :translated_chapters, presence: true, if: :translated?
-	validates :translated_url, presence: true, if: :translated?
+	validates :raws_url, presence: true, if: :translated?
 	
-	has_many :chapters
+	has_many :chapters, :dependent => :destroy
 
 	def slug
         name.downcase.gsub(" ", "-")

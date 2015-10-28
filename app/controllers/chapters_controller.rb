@@ -2,11 +2,15 @@ class ChaptersController < ApplicationController
 	before_filter :find_lightnovel
 	before_action :set_chapter, only: [:show, :edit, :update, :destroy]
 
-	def index
-		logger.debug ">>>>>>>>>>>chapter-index<<<<<<<<<<"
-		@chapters = @lightnovel.chapters
-		
+	def show
+
+	
+
+
+
 	end
+
+
 
 	private
 
