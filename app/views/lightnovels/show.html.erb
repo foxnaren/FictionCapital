@@ -1,17 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Name : </strong>
   <%= @lightnovel.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Description : </strong>
   <%= @lightnovel.description %>
 </p>
 
 <p>
-	<strong>Homepage/Raws: </strong>
+	<strong>Homepage/Raws : </strong>
 	<%= link_to 'Link', extlink(@lightnovel.home_url) %>
 </p>
 
@@ -19,7 +19,7 @@
 
 <% if @lightnovel.is_translated == true %>
 	<p>
-  		<strong>Translated Chapters:</strong>
+  		<strong>Raws : </strong>
   		<%= link_to 'Link', extlink(@lightnovel.raws_url) %>
 	</p>
 <% end %>	
@@ -33,7 +33,9 @@
         <th>Chapter Number</th>
         <th>Chapter Name</th>
         <th>Raws Link</th>
-        <th>Translated Link</th>
+        <% if @lightnovel.is_translated == true %>
+          <th>Translated Link</th>
+        <% end %>
         <th colspan="3"></th>
       </tr>
    </thead>
@@ -44,7 +46,9 @@
             <td><%= chapter.chapter_number %></td>
             <td><%= chapter.chapter_name %></td>
             <td><%= link_to 'Raws', extlink(chapter.home_url) %></td>
-            <td><%= link_to 'Translated', extlink(chapter.raws_url) %></td>
+            <% if @lightnovel.is_translated == true %>
+              <td><%= link_to 'Translated', extlink(chapter.raws_url) %></td>
+            <% end %>
           </tr>
         
       <% end %>
