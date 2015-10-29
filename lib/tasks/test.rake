@@ -58,13 +58,10 @@ task :fetch_royalroadl => :environment do
 				feed_count = feed.entries.count
 				puts ">>>>>>>>feedcount>>>>#{feed_count}<<<<<"
 
-				feed.entries.reverse_each do |f|
-				
-				# for cc in 1..2
-				# 	feed = feed.entries(cc)
+				feed.entries.reverse_each do |feed|
 
-					chapter_name = f.title
-					chapter_url = f.url
+					chapter_name = feed.title
+					chapter_url = feed.url
 
 					puts ">>>>>>>>chapter_name>>>>#{chapter_name}<<<<<"
 					puts ">>>>>>>>chapter_url>>>>#{chapter_url}<<<<<"
@@ -79,5 +76,3 @@ task :fetch_royalroadl => :environment do
 		end
 	end
 end
-
-

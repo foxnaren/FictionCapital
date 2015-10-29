@@ -11,8 +11,9 @@
 </p>
 
 <p>
-	<strong>Homepage/Raws : </strong>
-	<%= link_to 'Link', extlink(@lightnovel.home_url) %>
+	<strong>Homepage : </strong>
+	<%= link_to 'Link', @lightnovel.home_url %>
+	<!--extlink(@lightnovel.home_url)-->
 </p>
 
 <% logger.debug ">>>lightnovel#show>>>>>>>#{@lightnovel.is_translated}<<<<<<<<<<<<<" %>
@@ -20,7 +21,8 @@
 <% if @lightnovel.is_translated == true %>
 	<p>
   		<strong>Raws : </strong>
-  		<%= link_to 'Link', extlink(@lightnovel.raws_url) %>
+  		<%= link_to 'Link', @lightnovel.raws_url %>
+  		<!--extlink(@lightnovel.raws_url) -->
 	</p>
 <% end %>	
 
@@ -45,13 +47,15 @@
           <tr>
             <td><%= chapter.chapter_number %></td>
             <td><%= chapter.chapter_name %></td>
-            <td><%= link_to 'Raws', extlink(chapter.home_url) %></td>
+            <td><%= link_to 'Chapter Link', chapter.chapter_url %></td>
+            
+            <!--extlink(chapter.chapter_url)-->
             <% if @lightnovel.is_translated == true %>
-              <td><%= link_to 'Translated', extlink(chapter.raws_url) %></td>
+              <td><%= link_to 'Raws Link', chapter.raws_url  %></td>
+              <!--extlink(chapter.raws_url)-->
             <% end %>
           </tr>
         
       <% end %>
     </tbody>
 </table>
-
