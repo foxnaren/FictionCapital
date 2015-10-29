@@ -3,12 +3,12 @@ class LightnovelsController < ApplicationController
 
 	def index
 		logger.debug ">>>>>>>>>>>lightnovel-index<<<<<<<<<<"
-		#@lightnovels = Lightnovel.pluck(:name)
-		@lightnovels = Lightnovel.all
+		@lightnovels = Lightnovel.order('LOWER(name)')
 	end
 
 	def show
 		# @lightnovel set by privat method
+		@chapters = @lightnovel.chapters.order(chapter_number: :desc)
 	end
 
 	def edit
@@ -54,6 +54,6 @@ class LightnovelsController < ApplicationController
 
 		def lightnovel_params
 			logger.debug ">>>>lightnovel_params>>>>>>>#{params[:lightnovel]}<<<<<<<<<<"
-			params.require(:lightnovel).permit(:name, :description, :total_number_of_chapters, :raws_url, :is_translated, :translated_chapters, :translated_url)
+			params.require(:lightnovel).permit(:name, :description, :home_url, :is_translated, :raws_url)
 		end
 end

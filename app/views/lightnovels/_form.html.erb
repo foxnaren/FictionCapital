@@ -9,24 +9,16 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :total_number_of_chapters %><br>
-    <%= f.number_field :total_number_of_chapters %>
-  </div>
-  <div class="field">
-    <%= f.label :raws_url %><br>
-    <%= f.text_field :raws_url %>
+    <%= f.label :homepage %><br>
+    <%= f.text_field :home_url %>
   </div>  
   <div class="field">
     <%= f.label :is_translated %> <%= f.check_box  :is_translated %>
   </div>
   <div id="translated" style="display:none;">
     <div class="field">
-      <%= f.label :translated_chapters %><br>
-      <%= f.number_field :translated_chapters %>
-    </div>
-    <div class="field">
-      <%= f.label :translated_url %><br>
-      <%= f.text_field :translated_url %>
+      <%= f.label :raws_url %><br>
+      <%= f.text_field :raws_url %>
     </div>
   </div>
   <div class="actions">

@@ -14,6 +14,6 @@
 
 lightnovel = Lightnovel.create(name: "LN", description: "LN desc", total_number_of_chapters: 40, raws_url: "www.fictioncapital.com", is_translated: true, translated_chapters: 20, translated_url: "www.royalroad.com")
 
-Chapter.create(lightnovel_id: lightnovel.id, chapter_name: "test", chapter_number: 1, volume: 1, volume_chapter_number: 1, raws_url: "www.google.com", translated_url: "www.yahoo.com")
+Chapter.create(lightnovel_id: lightnovel.id, chapter_name: "test", chapter_number: 1, raws_url: "www.google.com", translated_url: "www.yahoo.com")
 
 

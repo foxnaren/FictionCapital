@@ -14,18 +14,14 @@
 ActiveRecord::Schema.define(version: 20151025132459) do
 
   create_table "chapters", force: :cascade do |t|
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "lightnovel_id",                       null: false
-    t.string   "chapter_name",                        null: false
-    t.integer  "chapter_number",                      null: false
-    t.integer  "volume",                              null: false
-    t.integer  "volume_chapter_number",               null: false
-    t.string   "raws_url",                            null: false
-    t.string   "translated_url",        default: "0"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "lightnovel_id",  null: false
+    t.string   "chapter_name",   null: false
+    t.integer  "chapter_number", null: false
+    t.string   "chapter_url",    null: false
+    t.string   "raws_url"
   end
-
-  add_index "chapters", ["lightnovel_id"], name: "index_chapters_on_lightnovel_id"
 
   create_table "examples", force: :cascade do |t|
     t.string   "name"
@@ -37,15 +33,13 @@ ActiveRecord::Schema.define(version: 20151025132459) do
   end
 
   create_table "lightnovels", force: :cascade do |t|
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.string   "name",                                     null: false
-    t.string   "description",                              null: false
-    t.integer  "total_number_of_chapters",                 null: false
-    t.string   "raws_url",                                 null: false
-    t.boolean  "is_translated",            default: false
-    t.integer  "translated_chapters",      default: 0
-    t.string   "translated_url",           default: "0"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "name",                          null: false
+    t.string   "description",                   null: false
+    t.string   "home_url",                      null: false
+    t.boolean  "is_translated", default: false
+    t.string   "raws_url"
   end
 
 end
