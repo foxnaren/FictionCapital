@@ -11,6 +11,30 @@ class ChaptersController < ApplicationController
 	end
 
 
+	def next
+
+		# ***********************change var*********************
+		current_chapter_number = 1
+
+
+		next_chapter_number = current_chapter_number+1
+
+		if @lightnovel.chapters.find_by(chapter_number: next_chapter_number) == nil
+
+			parse_url
+			case home_url_parsed
+			when ""
+				
+			
+
+
+			
+
+
+		end
+
+
+	end	
 
 	private
 
@@ -23,6 +47,11 @@ class ChaptersController < ApplicationController
        		@lightnovel = Lightnovel.find(params[:lightnovel_id])
        		logger.debug ">>>>>>find_lightnovel>>>>>>>>#{@lightnovel}<<<<<<<<<<<<<<"
     	end
+
+    	def parse_url
+    		home_url = URI.parse(@lightnovel.home_url)
+			home_url_parsed = "{uri.host}" 
+		end
 
 end
 

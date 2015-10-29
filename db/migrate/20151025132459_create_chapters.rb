@@ -4,7 +4,7 @@ class CreateChapters < ActiveRecord::Migration
 
       t.timestamps null: false
 
-      t.references :lightnovel, null: false, index: true, foreign_key: true
+      t.references :lightnovel, null: false, foreign_key: true
       t.string :chapter_name, null: false
       t.integer :chapter_number, null: false
       t.string  :chapter_url, null: false
