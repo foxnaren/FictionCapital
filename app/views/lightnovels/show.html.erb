@@ -26,6 +26,15 @@
 	</p>
 <% end %>	
 
+<div class = "latest_chapters">
+  <p>
+    <strong>Latest Chapters : </strong>
+    <% (@chapters.first(5)).each do |chapter| %>  
+      -<%= link_to chapter.chapter_number, chapter.chapter_url %>-
+    <% end %>
+  </p>
+</div>
+
 <%= link_to 'Edit', edit_lightnovel_path(@lightnovel) %> |
 <%= link_to 'Back', lightnovels_path %>
 
@@ -42,7 +51,7 @@
       </tr>
    </thead>
    <tbody>
-      <% @chapters.each do |chapter| %>
+      <% @chapters.reverse_each do |chapter| %>
 
           <tr>
             <td><%= chapter.chapter_number %></td>

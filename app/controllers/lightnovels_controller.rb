@@ -27,7 +27,7 @@ class LightnovelsController < ApplicationController
         	redirect_to @lightnovel, notice: 'Lightnovel was successfully created.'
         else
         	render :new
-        end
+		end
 	end
 
 	def update
@@ -36,14 +36,14 @@ class LightnovelsController < ApplicationController
         	redirect_to @lightnovel, notice: 'Lightnovel was successfully updated.'
         else
         	render :edit
-        end
-    end
+		end
+	end
 		
 	def destroy
 		logger.debug ">>>>lightnovel-destroy>>>>>>>#{@lightnovel.name}<<<<<<<<<<"
 		@lightnovel.destroy
        	redirect_to lightnovels_url, notice: "Lightnovel #{@lightnovel.name} was successfully destroyed."
-    end
+	end
 
 	private
 
