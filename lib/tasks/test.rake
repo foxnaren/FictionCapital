@@ -1,78 +1,28 @@
-desc "Fetch Royalroadl Links"
-task :fetch_royalroadl => :environment do
-
-	require 'rubygems'
-	require 'feedjira'
-	require 'nokogiri'
+desc "testing"
+task :testingthis => :environment do
+    
+    require 'rubygems'
+    require 'nokogiri'
 	require 'open-uri'
-
-	for fictionID in 70..75
+	
+	@lightnovel = Lightnovel.find(1)
 		
-		url_feed = "http://royalroadl.com/forum/syndication.php?fid=#{fictionID}"
-		url_nok = "http://royalroadl.com/fiction/#{fictionID}"
+		# home_url = @lightnovel.chapters.find_by(chapter_number: 1).chapter_url
+		home_url = "http://www.royalroadl.com/forum/showthread.php?tid=7778"
+        puts home_url
+        home_url_parsed = URI.parse(@lightnovel.home_url).host
+        puts home_url_parsed
+# 			home_url = URI.parse(@lightnovel.home_url)
+# 			home_url_parsed = "{home_url.host}" 
 
-		puts ">>>>>url-feed>>>#{url_feed}<<<<"
-		puts ">>>>url-nok>>>#{url_nok}<<<<<"
+    	doc = Nokogiri::HTML(open(home_url))
+    	
+    	puts "doc"
+    	
+    	sel = Selector.find_by(url_base: home_url_parsed).selector
+    	
+    	puts sel
 		
-		feed = Feedjira::Feed.fetch_and_parse url_feed
-		doc = Nokogiri::HTML(open(url_nok))
-		
-		count = feed.entries.count
-
-		#puts ">>>feed>>>>>>>#{feed}<<<<<<<<<"
-		#puts ">>>doc>>>>>>>#{doc}<<<<<<<<<"
-
-		puts ">>>Count>>>>>>>#{count}<<<<<<<<<"
-		puts ">>>doc.at_css>>>>>>>#{doc.at_css(".fiction-title")}<<<<<<<<<"
-		
-		if doc.at_css(".fiction-title") != nil
-
-			if count != 0
-
-				title = doc.at_css(".fiction-title").text
-				description = doc.at_css(".description").text
-
-				puts ">>>>title>>>>#{title}<<<<<"
-				puts ">>>>description>>>>#{description}<<<<<"
-
-				@lightnovel = Lightnovel.create :name => title, :description => description, :home_url => url_nok
-
-				puts ">>>>lightnovel_id>>>>#{@lightnovel.id}<<<<<<"
-
-
-				@lightnovel.save
-
-				puts ">>>>>>>>lightnovel_saved<<<<<<"
-
-				@lightnovel_n = Lightnovel.find_by(name: title)
-
-				lightnovel_id = @lightnovel_n.id
-
-				chapter_number = 1
-				
-
-				puts ">>>>>>>>chapter_init>>>#{chapter_number}<<<<<<"
-
-				puts ">>>>>>>>lightnovel_id>>>#{lightnovel_id}<<<<<<"
-
-				feed_count = feed.entries.count
-				puts ">>>>>>>>feedcount>>>>#{feed_count}<<<<<"
-
-				feed.entries.reverse_each do |feed|
-
-					chapter_name = feed.title
-					chapter_url = feed.url
-
-					puts ">>>>>>>>chapter_name>>>>#{chapter_name}<<<<<"
-					puts ">>>>>>>>chapter_url>>>>#{chapter_url}<<<<<"
-					puts ">>>>>>>>@lightnovel.id>>>>#{@lightnovel.id}<<<<<"
-
-					@chapter = Chapter.create :lightnovel => @lightnovel, :chapter_name => chapter_name, :chapter_number => chapter_number, :chapter_url => chapter_url, :raws_url => "nil"
-					@chapter.save
-
-					chapter_number = chapter_number + 1
-				end
-			end
-		end
-	end
+		puts doc.at_css(sel)[:href]
 end
+	

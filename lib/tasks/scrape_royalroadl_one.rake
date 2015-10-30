@@ -1,5 +1,5 @@
 desc "Fetch Royalroadl Links"
-task :fetch_royalroadl => :environment do
+task :fetch_royalroadl_one => :environment do
 
 	require 'rubygems'
 	require 'feedjira'
@@ -58,9 +58,9 @@ task :fetch_royalroadl => :environment do
 				feed_count = feed.entries.count
 				puts ">>>>>>>>feedcount>>>>#{feed_count}<<<<<"
 
-				feed.entries.reverse_each do |f|
-				# for cc in 0..0
-				# f=feed.entries.last
+				# feed.entries.reverse_each do |f|
+				for cc in 0..0
+				f=feed.entries.last
 				
 				
 					chapter_name = f.title
