@@ -1,2 +1,6 @@
 Model - Singular - eg Singular, Lightnovel
 Controller - Plural - eg Lightnovels, 
+
+
+
+Selector.create url_base: "www.royalroadl.com", selector: "td:nth-child(3) a", name: "div.largetext"

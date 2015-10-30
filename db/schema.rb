@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20151029223548) do
     t.datetime "updated_at", null: false
     t.string   "url_base",   null: false
     t.string   "selector",   null: false
+    t.string   "name",       null: false
   end
 
 end

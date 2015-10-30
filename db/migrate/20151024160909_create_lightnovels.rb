@@ -9,7 +9,7 @@ class CreateLightnovels < ActiveRecord::Migration
       t.string	:home_url, null: false
       t.boolean	:is_translated, default: false
       t.string	:raws_url, default: nil
-
+      t.integer :number_of_chapters, default: 0
     end
   end
 end

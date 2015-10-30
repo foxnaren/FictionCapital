@@ -6,7 +6,7 @@ task :fetch_royalroadl_one => :environment do
 	require 'nokogiri'
 	require 'open-uri'
 
-	for fictionID in 500..505
+	for fictionID in 1..200
 		
 		url_feed = "http://royalroadl.com/forum/syndication.php?fid=#{fictionID}"
 		url_nok = "http://royalroadl.com/fiction/#{fictionID}"

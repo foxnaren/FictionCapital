@@ -18,11 +18,13 @@ task :testingthis => :environment do
     	doc = Nokogiri::HTML(open(home_url))
     	
     	puts "doc"
+
+
     	
     	sel = Selector.find_by(url_base: home_url_parsed).selector
     	
     	puts sel
 		
-		puts doc.at_css(sel)[:href]
+		puts doc.at_css(sel).text
 end
 	
