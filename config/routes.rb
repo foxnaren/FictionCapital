@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
 
   root 'lightnovels#index'
@@ -5,6 +7,7 @@ Rails.application.routes.draw do
   resources :lightnovels do 
       resources :chapters    
   end
+  mount Sidekiq::Web, at: '/sidekiq'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

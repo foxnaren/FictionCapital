@@ -27,6 +27,10 @@ gem 'feedjira', '~> 2.0'
 # nokugiri
 gem 'nokogiri', '~> 1.6', '>= 1.6.6.2'
 
+gem 'sidekiq', '~> 3.5', '>= 3.5.2'
+gem 'sinatra', require: false
+gem 'slim'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

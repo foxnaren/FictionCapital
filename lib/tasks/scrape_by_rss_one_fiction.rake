@@ -1,3 +1,8 @@
+
+#need to be modified to a function
+
+
+
 desc "Fetch Royalroadl Links"
 task :fetch_royalroadl => :environment do
 
