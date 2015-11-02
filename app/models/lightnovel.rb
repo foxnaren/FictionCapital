@@ -8,9 +8,9 @@ class Lightnovel < ActiveRecord::Base
 	has_many :chapters, :dependent => :destroy
 
 	def slug
-        name.downcase.gsub(" ", "-")
-    end
-    
+       	name.parameterize
+  	end
+  
     def to_param
         "#{id}-#{slug}"
     end

@@ -2,6 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  devise_for :users
   root 'lightnovels#index'
   resources :examples
   resources :lightnovels do 

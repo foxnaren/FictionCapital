@@ -1,5 +1,15 @@
 class LightnovelsController < ApplicationController
 	before_action :set_lightnovel, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate_user!
+
+
+	def home
+		if user_signed_in
+		end
+
+		
+	end
+
 
 	def index
 		logger.debug ">>>>>>>>>>>lightnovel-index<<<<<<<<<<"

@@ -1,6 +1,6 @@
-#     require 'rubygems'
-#     require 'nokogiri'
-# 	require 'open-uri'
+require 'rubygems'
+require 'nokogiri'
+require 'open-uri'
 
 class CheckLatestChapter
     include Sidekiq::Worker
@@ -27,7 +27,7 @@ class CheckLatestChapter
                     chapter_name = doc.at_css(selector_name).text
                     Chapter.create lightnovel: lightnovel, chapter_name: chapter_name, chapter_number: chapter_number, chapter_url: chapter_url
                     # puts ">>>#{lightnovel.name}>>>>>#{chapter_number}>>>>>#{chapter_url}<<<<<<<<<<"
-                    # get_next_chapter(next_chapter_number, lightnovel)
+                    perform(next_chapter_number, lightnovel)
                 end
             end
 	    end

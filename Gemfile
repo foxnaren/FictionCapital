@@ -31,6 +31,9 @@ gem 'sidekiq', '~> 3.5', '>= 3.5.2'
 gem 'sinatra', require: false
 gem 'slim'
 
+gem 'devise', '~> 3.5', '>= 3.5.2'
+# gem 'omniauth-google-oauth2', '~> 0.2.9'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

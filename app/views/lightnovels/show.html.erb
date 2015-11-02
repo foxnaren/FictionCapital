@@ -43,6 +43,7 @@
       <tr>
         <th>Chapter Number</th>
         <th>Chapter Name</th>
+        <th>Added On</th>
         <th>Raws Link</th>
         <% if @lightnovel.is_translated == true %>
           <th>Translated Link</th>
@@ -52,17 +53,22 @@
    </thead>
    <tbody>
       <% @chapters.reverse_each do |chapter| %>
-
           <tr>
             <td><%= chapter.chapter_number %></td>
             <td><%= chapter.chapter_name %></td>
+            <td><%= chapter.created_at.to_date %></td>
             <td><%= link_to 'Chapter Link', chapter.chapter_url %></td>
-            
             <!--extlink(chapter.chapter_url)-->
             <% if @lightnovel.is_translated == true %>
               <td><%= link_to 'Raws Link', chapter.raws_url  %></td>
               <!--extlink(chapter.raws_url)-->
             <% end %>
+<!--             <td><%= link_to 'Edit', edit_lightnovel_chapter_path(chapter) %></td>
+            <td><%= link_to 'Destroy', lightnovel, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+
+
+
+
           </tr>
         
       <% end %>

@@ -10,7 +10,7 @@ class CreateLightnovels < ActiveRecord::Migration
       t.boolean	:is_translated, default: false
       t.string	:raws_url, default: nil
       t.integer :number_of_chapters, default: 0
-      t.datetime :last_modified, default: DateTime.now
+      t.datetime :last_modified, default: Time.now
     end
   end
 end
