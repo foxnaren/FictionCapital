@@ -1,6 +1,6 @@
 
 >>> Add images to the lightnovel index
 >>> Change cache location to mem cache (set a limit) or reddis (for fragment caching) in enc/prod (railscast fragment caching)
-
+>>> turn on cache for lightnovel
 
 

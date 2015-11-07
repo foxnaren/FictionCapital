@@ -20,6 +20,6 @@ Controller - Plural - eg Lightnovels,
 
 4) Inserting to the DB: Selector.create url_base: "www.royalroadl.com", selector: "td:nth-child(3) a", name: "div.largetext"
 
-Chapter.create lightnovel: Lightnovel.find(1696), chapter_name: "Critism, Suggestions, Comments, and Discussion", chapter_number: 6, chapter_url: "http://royalroadl.com/forum/showthread.php?tid=19277"
+Chapter.create lightnovel: Lightnovel.find(562), chapter_name: "And so I got Burgled", chapter_number: 15, chapter_url: "http://royalroadl.com/forum/showthread.php?tid=17921"
 
 5) Rails server in c9 : rails s -p $PORT -b $IP
