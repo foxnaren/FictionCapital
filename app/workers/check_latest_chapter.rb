@@ -5,9 +5,9 @@ require 'open-uri'
 class CheckLatestChapter
     include Sidekiq::Worker
     ## Input current_chapter_number: From @chapters.first.chapter_number, lightnovel_id: from the controller
-    def perform(current_chapter_number, lightnovel_id)
+    def perform(current_chapter_number, id)
         ## Populate lightnovel and calculate the next chapter number
-        lightnovel = Lightnovel.find(lightnovel_id)
+        lightnovel = Lightnovel.find(id)
 	    next_chapter_number = current_chapter_number + 1
 	    #puts "#{lightnovel.id}"
 	    ## check of the chapter number is present for the lightnovel

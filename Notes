@@ -3,6 +3,9 @@ Controller - Plural - eg Lightnovels,
 
 1) Dump db into seed: rake db:seed:dump
 
+> t = CheckLatestChapter.new
+> t.perform(1,103)
+
 2) Sidekiq:
     a) Redis
         I) Install :    wget http://download.redis.io/redis-stable.tar.gz
