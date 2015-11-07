@@ -1,5 +1,5 @@
 class Chapter < ActiveRecord::Base
 	
-	belongs_to :lightnovel
+	belongs_to :lightnovel, touch: true
 
 end

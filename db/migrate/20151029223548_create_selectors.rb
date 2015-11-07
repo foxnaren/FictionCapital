@@ -8,5 +8,7 @@ class CreateSelectors < ActiveRecord::Migration
       t.string :name, null: false
       
     end
+    
+    add_index :selectors, :url_base,                unique: true
   end
 end

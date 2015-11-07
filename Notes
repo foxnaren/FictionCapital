@@ -1,8 +1,25 @@
 Model - Singular - eg Singular, Lightnovel
 Controller - Plural - eg Lightnovels, 
 
+1) Dump db into seed: rake db:seed:dump
 
+2) Sidekiq:
+    a) Redis
+        I) Install :    wget http://download.redis.io/redis-stable.tar.gz
+                    tar xvzf redis-stable.tar.gz
+                    cd redis-stable
+                    make
+        II) Test installation:  make test
+        III) Run reddis : redis-server
+    b) Sidekiq
+        I) bundle exec sidekiq
 
-Selector.create url_base: "www.royalroadl.com", selector: "td:nth-child(3) a", name: "div.largetext"
+            <!-- <td><%= link_to 'Edit', edit_lightnovel_chapter_path(@lightnovel, chapter) %></td>-->
+            <!--<td><%= link_to 'Destroy', lightnovel_chapter, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+3) Cache: expire cache : expire_fragment("lightnovel_index")
 
-Chapter.create lightnovel: Lightnovel.find(42), chapter_name: "Vol 1 Chapter 5 - The Defence Army Part 3", chapter_number: 10, chapter_url: "http://royalroadl.com/forum/showthread.php?tid=1097"
+4) Inserting to the DB: Selector.create url_base: "www.royalroadl.com", selector: "td:nth-child(3) a", name: "div.largetext"
+
+Chapter.create lightnovel: Lightnovel.find(1696), chapter_name: "Critism, Suggestions, Comments, and Discussion", chapter_number: 6, chapter_url: "http://royalroadl.com/forum/showthread.php?tid=19277"
+
+5) Rails server in c9 : rails s -p $PORT -b $IP
