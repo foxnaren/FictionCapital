@@ -22,6 +22,17 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+# feedjira
+gem 'feedjira', '~> 2.0'
+# nokugiri
+gem 'nokogiri', '~> 1.6', '>= 1.6.6.2'
+
+gem 'sidekiq', '~> 3.5', '>= 3.5.2'
+gem 'sinatra', require: false
+gem 'slim'
+
+gem 'devise', '~> 3.5', '>= 3.5.2'
+# gem 'omniauth-google-oauth2', '~> 0.2.9'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -8,13 +8,15 @@
   <thead>
       <tr>
           <th>Name</th>
+          <th>Number of Chapters</th>
           <th colspan="3"></th>
       </tr>
-   </thead>
+   </thead>   
    <tbody>
       <% @lightnovels.each do |lightnovel| %>
           <tr>
             <td><%= lightnovel.name %></td>
+            <td><%= lightnovel.chapters.count %></td>
             <td><%= link_to 'Show', lightnovel %></td>
             <td><%= link_to 'Edit', edit_lightnovel_path(lightnovel) %></td>
             <td><%= link_to 'Destroy', lightnovel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
