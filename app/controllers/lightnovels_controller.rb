@@ -19,7 +19,7 @@ class LightnovelsController < ApplicationController
 	def show
 		# @lightnovel set by privat method
 		@chapters = @lightnovel.chapters.order(chapter_number: :desc)
-		CheckLatestChapter.perform_async(@chapters.first.chapter_number, @lightnovel.id)
+		#CheckLatestChapter.perform_async(@chapters.first.chapter_number, @lightnovel.id)
 	end
 
 	def edit
