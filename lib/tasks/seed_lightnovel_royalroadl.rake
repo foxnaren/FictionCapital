@@ -36,7 +36,7 @@ task :seed_lightnovel_royalroadl => :environment do
                 ## Create the new chapter in the database	            
                 @chapter = Chapter.create :lightnovel => @lightnovel, :chapter_name => chapter_name, :chapter_number => chapter_number, :chapter_url => chapter_url
                 ##>>>>>>>>>>Add a scheduled task to recursively add new chapters to the database<<<<<<<<<<<<<<
-                CheckLatestChapter.perform_in(chapter_number, @lightnovel.id)
+                CheckLatestChapter.perform_async(chapter_number, @lightnovel.id)
                 #CheckLatestChapter.perform_in(1.hour, chapter_number, @lightnovel.id)
                 ## If the chapter exsists check to update the condition
                 if (total_royalroadl_fiction-fictionID)<=50
