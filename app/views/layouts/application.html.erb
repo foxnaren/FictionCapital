@@ -7,8 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+  </div>
+	
 	<div id="user_nav">
   		<% if user_signed_in? %>
     		Signed in as <%= current_user.email %>. Not you?

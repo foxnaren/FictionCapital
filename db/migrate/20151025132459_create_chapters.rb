@@ -11,5 +11,8 @@ class CreateChapters < ActiveRecord::Migration
       t.string  :raws_url, default: nil
 
     end
+    
+    add_index(:chapters, :lightnovel_id)
+    add_index(:chapters, [:lightnovel_id, :chapter_number], unique: true)
   end
 end

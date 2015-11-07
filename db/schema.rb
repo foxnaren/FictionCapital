@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.string   "raws_url"
   end
 
+  add_index "chapters", ["lightnovel_id", "chapter_number"], name: "index_chapters_on_lightnovel_id_and_chapter_number", unique: true
+  add_index "chapters", ["lightnovel_id"], name: "index_chapters_on_lightnovel_id"
+
   create_table "examples", force: :cascade do |t|
     t.string   "name"
     t.string   "integer"
@@ -41,8 +44,10 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.boolean  "is_translated",      default: false
     t.string   "raws_url"
     t.integer  "number_of_chapters", default: 0
-    t.datetime "last_modified",      default: '2015-11-07 00:16:48'
+    t.datetime "last_modified",      default: '2015-11-07 22:28:54'
   end
+
+  add_index "lightnovels", ["name"], name: "index_lightnovels_on_name"
 
   create_table "selectors", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -51,6 +56,8 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.string   "selector",   null: false
     t.string   "name",       null: false
   end
+
+  add_index "selectors", ["url_base"], name: "index_selectors_on_url_base", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

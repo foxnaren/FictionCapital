@@ -42,7 +42,9 @@ gem 'devise', '~> 3.5', '>= 3.5.2'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+group :development do
+  gem 'seed_dump', '~> 3.2', '>= 3.2.2'
+end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

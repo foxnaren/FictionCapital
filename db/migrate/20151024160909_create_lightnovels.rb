@@ -12,5 +12,6 @@ class CreateLightnovels < ActiveRecord::Migration
       t.integer :number_of_chapters, default: 0
       t.datetime :last_modified, default: Time.now
     end
+    add_index(:lightnovels, :name)
   end
 end
