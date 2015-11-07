@@ -22,6 +22,7 @@ task :seed_lightnovel_royalroadl => :environment do
 	    	doc = Nokogiri::HTML(open(url))
             ## Check if the fiction-title and chapter exsists in the URL opened
             if (doc.at_css(".fiction-title") != nil) && (doc.at_css(".chapter:nth-child(1) a") != nil)
+                # sleep(5)
                 ## Populate title and description	    	    
 	    		title = doc.at_css(".fiction-title").text
 	            description = doc.at_css(".description").text
@@ -36,8 +37,8 @@ task :seed_lightnovel_royalroadl => :environment do
                 ## Create the new chapter in the database	            
                 @chapter = Chapter.create :lightnovel => @lightnovel, :chapter_name => chapter_name, :chapter_number => chapter_number, :chapter_url => chapter_url
                 ##>>>>>>>>>>Add a scheduled task to recursively add new chapters to the database<<<<<<<<<<<<<<
-                CheckLatestChapter.perform_async(chapter_number, @lightnovel.id)
-                #CheckLatestChapter.perform_in(1.hour, chapter_number, @lightnovel.id)
+                # CheckLatestChapter.perform_async(chapter_number, @lightnovel.id)
+                CheckLatestChapter.perform_in(1.hour, chapter_number, @lightnovel.id)
                 ## If the chapter exsists check to update the condition
                 if (total_royalroadl_fiction-fictionID)<=50
     	            total_royalroadl_fiction = total_royalroadl_fiction + 50

@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.boolean  "is_translated",      default: false
     t.string   "raws_url"
     t.integer  "number_of_chapters", default: 0
-    t.datetime "last_modified",      default: '2015-11-07 01:31:38'
+    t.datetime "last_modified",      default: '2015-11-07 22:28:54'
   end
 
   add_index "lightnovels", ["name"], name: "index_lightnovels_on_name"
