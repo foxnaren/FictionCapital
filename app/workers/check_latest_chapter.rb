@@ -2,6 +2,7 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 ## need to test the changes
+#test comment
 class CheckLatestChapter
     include Sidekiq::Worker
     ## Input current_chapter_number: From @chapters.first.chapter_number, lightnovel_id: from the controller
