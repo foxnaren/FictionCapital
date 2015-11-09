@@ -19,7 +19,6 @@ class CheckLatestChapter
 	        ## get the url and parse it to get the base url
             if @current_chapter_url.blank?
                 @current_chapter_url = @lightnovel.chapters.find_by(chapter_number: current_chapter_number).chapter_url
-                ## ********NEED TO BE CACHED*********
             end
             if @selector.blank?
                 chapter_url_parsed = URI.parse(@current_chapter_url).host
