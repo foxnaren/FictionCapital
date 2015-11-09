@@ -8,6 +8,7 @@ class SeedLightnovelRoyalroadl
     def perform(fictionID)
 	    ##initialise total_royalroadl_fiction
 	    total_royalroadl_fiction = fictionID+50
+	    # total_royalroadl_fiction = 20
 
 	    ##Loop through while total_royalroadl_fiction - fictionID is greater than 0
 	    
@@ -28,7 +29,7 @@ class SeedLightnovelRoyalroadl
 		            description = doc.at_css(".description").text
 		            # puts ">>>>>title>>description>>#{title}<<<<<#{description}<<<<"
 	                ## Create the new Light novel in the database	            
-	    		    @lightnovel = Lightnovel.create :name => title, :description => description, :home_url => url
+	    		    @lightnovel = Lightnovel.create :name => title, :description => description, :home_url => url, :number_of_chapters => 1
 	                ## Populate the first chapter URL, name and number                    
 	    		    chapter_url = doc.at_css(".chapter:nth-child(1) a")['href'] 
 	    		    chapter_name = doc.at_css(".chapter:nth-child(1) span:nth-child(1)").text
@@ -37,8 +38,8 @@ class SeedLightnovelRoyalroadl
 	                ## Create the new chapter in the database	            
 	                @chapter = Chapter.create :lightnovel => @lightnovel, :chapter_name => chapter_name, :chapter_number => chapter_number, :chapter_url => chapter_url
 	                ##>>>>>>>>>>Add a scheduled task to recursively add new chapters to the database<<<<<<<<<<<<<<
-	                # CheckLatestChapter.perform_async(chapter_number, @lightnovel.id)
-	                CheckLatestChapter.perform_in(1.hour, chapter_number, @lightnovel.id)
+	                CheckLatestChapter.perform_async(chapter_number, @lightnovel.id)
+	                # CheckLatestChapter.perform_in(1.hour, chapter_number, @lightnovel.id)
 	                ## If the chapter exsists check to update the condition
 	                if (total_royalroadl_fiction-fictionID)<=50
 	    	            total_royalroadl_fiction = total_royalroadl_fiction + 50

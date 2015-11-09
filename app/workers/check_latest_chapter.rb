@@ -21,7 +21,6 @@ class CheckLatestChapter
                 @current_chapter_url = @lightnovel.chapters.find_by(chapter_number: current_chapter_number).chapter_url
                 ## ********NEED TO BE CACHED*********
             end
-
             if @selector.blank?
                 chapter_url_parsed = URI.parse(@current_chapter_url).host
                 ## check if the www. part of the url is present
@@ -32,10 +31,12 @@ class CheckLatestChapter
             end
             ## open the website
             if @doc.blank?
-           	    @doc = Nokogiri::HTML(open(@current_chapter_url)) 
+                @doc = Nokogiri::HTML(open(@current_chapter_url)) 
             end
-           	next_chapter_text = doc.at_css(@selector.selector)
-            next_chapter_link = next_chapter_text[:href]
+           	next_chapter_text = @doc.at_css(@selector.selector)
+            unless next_chapter_text.blank?
+                next_chapter_link = next_chapter_text[:href]
+            end
             ## check if the next chapter is blank or not ## check if the next chapter is a link ## check if the next chapter link is the same as the present chapter
             if ((next_chapter_text).blank?) || (next_chapter_link).blank? || (@current_chapter_url == (next_chapter_link))
                 if @lightnovel.number_of_chapters < current_chapter_number
@@ -47,7 +48,7 @@ class CheckLatestChapter
                 ## Open the next chapter page
                 @doc = Nokogiri::HTML(open(next_chapter_link))
                 ## Populate the next chapter name from the newly opened page
-                chapter_name = doc.at_css(@selector.name).text
+                chapter_name = @doc.at_css(@selector.name).text
                 ## Create a new entry into the database
                 Chapter.create lightnovel: @lightnovel, chapter_name: chapter_name, chapter_number: chapter_number, chapter_url: next_chapter_link
                 # puts ">>>#{lightnovel.name}>>>>>#{chapter_number}>>>>>#{chapter_url}<<<<<<<<<<"
