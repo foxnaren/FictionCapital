@@ -1,6 +1,24 @@
 
 >>> Add images to the lightnovel index
->>> Change cache location to mem cache (set a limit) or reddis (for fragment caching) in enc/prod (railscast fragment caching)
+
 >>> turn on cache for lightnovel
+>>> remove new create and update for lightnovel
+
+>>> Search
+>>> Sortable
+>>> will paginate
+>>> Sort and paginate
+>>> thinking spynx search
+
+Cron : 	1) run seed royalroadl once a week from 0
+		2) Run seedroyalroadl once a day from last stoped place
 
 
+>>> remove seed_lightnovel_royalroadl.rake from lib
+>>> Database to track last run fictionID?
+
+
+Productiom:
+
+>>> If using whenever add to capisrano file
+>>> Change cache location to mem cache (set a limit) or reddis (for fragment caching) in enc/prod (railscast fragment caching)

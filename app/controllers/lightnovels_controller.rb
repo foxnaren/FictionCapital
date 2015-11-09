@@ -13,7 +13,7 @@ class LightnovelsController < ApplicationController
 
 	def index
 		logger.debug ">>>>>>>>>>>lightnovel-index<<<<<<<<<<"
-		@lightnovels = Lightnovel.order('LOWER(name)')
+		@lightnovels = Lightnovel.search(params[:search]).order('LOWER(name)').paginate(:per_page => 20, :page => params[:page])
 	end
 
 	def show

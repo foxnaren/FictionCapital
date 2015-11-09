@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151101021534) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "chapters", force: :cascade do |t|
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.string   "raws_url"
   end
 
-  add_index "chapters", ["lightnovel_id", "chapter_number"], name: "index_chapters_on_lightnovel_id_and_chapter_number", unique: true
-  add_index "chapters", ["lightnovel_id"], name: "index_chapters_on_lightnovel_id"
+  add_index "chapters", ["lightnovel_id", "chapter_number"], name: "index_chapters_on_lightnovel_id_and_chapter_number", unique: true, using: :btree
+  add_index "chapters", ["lightnovel_id"], name: "index_chapters_on_lightnovel_id", using: :btree
 
   create_table "examples", force: :cascade do |t|
     t.string   "name"
@@ -44,10 +47,10 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.boolean  "is_translated",      default: false
     t.string   "raws_url"
     t.integer  "number_of_chapters", default: 0
-    t.datetime "last_modified",      default: '2015-11-07 22:28:54'
+    t.datetime "last_modified",      default: '2015-11-08 23:06:00'
   end
 
-  add_index "lightnovels", ["name"], name: "index_lightnovels_on_name"
+  add_index "lightnovels", ["name"], name: "index_lightnovels_on_name", using: :btree
 
   create_table "selectors", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -57,7 +60,7 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.string   "name",       null: false
   end
 
-  add_index "selectors", ["url_base"], name: "index_selectors_on_url_base", unique: true
+  add_index "selectors", ["url_base"], name: "index_selectors_on_url_base", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -78,8 +81,9 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "chapters", "lightnovels"
 end

@@ -6,7 +6,7 @@ task :seed_lightnovel_royalroadl => :environment do
     require 'open-uri'
 
     ##initialise fictionID and total_royalroadl_fiction
-    fictionID = 0
+    fictionID = 2200
     total_royalroadl_fiction = fictionID+100
 
     ##Loop through while total_royalroadl_fiction - fictionID is greater than 0

@@ -19,10 +19,20 @@ Controller - Plural - eg Lightnovels,
 
             <!-- <td><%= link_to 'Edit', edit_lightnovel_chapter_path(@lightnovel, chapter) %></td>-->
             <!--<td><%= link_to 'Destroy', lightnovel_chapter, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-3) Cache: expire cache : expire_fragment("lightnovel_index")
 
-4) Inserting to the DB: Selector.create url_base: "www.royalroadl.com", selector: "td:nth-child(3) a", name: "div.largetext"
+            apt-get install postgresql-9.4 
+            sudo apt-get install libpq-dev
+            gem install pg
+
+            bundle install
+
+3) Cache: expire cache : expire_fragment("lightnovel_index")
+    clear cache: Rails.cache.clear
+
+4) Inserting to the DB: Selector.create url_base: "www.royalroadl.com", selector: "td:nth-child(3) a", name: "div.largetext"            
 
 Chapter.create lightnovel: Lightnovel.find(562), chapter_name: "And so I got Burgled", chapter_number: 15, chapter_url: "http://royalroadl.com/forum/showthread.php?tid=17921"
 
 5) Rails server in c9 : rails s -p $PORT -b $IP
+
+6) 

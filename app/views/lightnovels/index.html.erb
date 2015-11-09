@@ -1,6 +1,16 @@
 <h1>Listing All LightNovles</h1>
 
-<br><%= link_to 'New Lightnovel', new_lightnovel_path %>
+
+<%= form_tag lightnovels_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<br/><%= link_to 'New Lightnovel', new_lightnovel_path %>
+
+<br/><%= will_paginate @products %>
 <% cache @lightnovels do %>
   <table>
     <thead>
@@ -12,7 +22,7 @@
      </thead>   
      <tbody>
         <% @lightnovels.each do |lightnovel| %>
-            <% #cache ["single", lightnovel] do %>
+            <% cache ["single", lightnovel] do %>
               <tr>
                 <td><%= lightnovel.name %></td>
                 <td><%= lightnovel.chapters.count %></td>
@@ -20,8 +30,10 @@
                 <td><%= link_to 'Edit', edit_lightnovel_path(lightnovel) %></td>
                 <td><%= link_to 'Destroy', lightnovel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
-            <% #end %>
+            <% end %>
         <% end %>
       </tbody>
   </table>
 <% end %>
+
+<br/><%= will_paginate @products %>
