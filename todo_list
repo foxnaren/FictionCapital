@@ -1,17 +1,22 @@
 
->>> Add images to the lightnovel index
+
+>>> Add number of chapters to all 
 
 >>> turn on cache for lightnovel
 >>> remove new create and update for lightnovel
+
+>>> Review section for novels
 
 >>> Search
 >>> Sortable
 >>> will paginate
 >>> Sort and paginate
 >>> thinking spynx search
+>>> Add images to the lightnovel index
 
-Cron : 	1) run seed royalroadl once a week from 0
+Cron : 	1) Run seed royalroadl once a week from 0
 		2) Run seedroyalroadl once a day from last stoped place
+		3) Run Check new chapters if the chapter was not checked in the past 24 hours
 
 
 >>> remove seed_lightnovel_royalroadl.rake from lib

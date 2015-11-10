@@ -35,4 +35,4 @@ Chapter.create lightnovel: Lightnovel.find(562), chapter_name: "And so I got Bur
 
 5) Rails server in c9 : rails s -p $PORT -b $IP
 
-6) 
+6) PostgreSQL:setup https://github.com/Aerogami/guides/wiki/Cloud9-workspace-setup-with-Rails-and-Postgresql
