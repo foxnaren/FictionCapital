@@ -1,5 +1,6 @@
 class LightnovelsController < ApplicationController
-	before_action :set_lightnovel, only: [:show, :edit, :update, :destroy]
+	# :edit,
+	before_action :set_lightnovel, only: [:show, :update, :destroy]
 	before_action :authenticate_user!
 
 
@@ -22,9 +23,9 @@ class LightnovelsController < ApplicationController
 		CheckLatestChapter.perform_async(@chapters.first.chapter_number, @lightnovel.id)
 	end
 
-	def edit
-
-	end
+	# def edit
+	# 	@chapter = @lightnovel.chapters.last
+	# end
 
 	def new
 		logger.debug ">>>>>>>>>>>lightnovel-new<<<<<<<<<<"
@@ -66,6 +67,6 @@ class LightnovelsController < ApplicationController
 
 		def lightnovel_params
 			logger.debug ">>>>lightnovel_params>>>>>>>#{params[:lightnovel]}<<<<<<<<<<"
-			params.require(:lightnovel).permit(:name, :description, :home_url, :is_translated, :raws_url, chapter_attribute: [:chapter_number, :chapter_name, :chapter_url])
+			params.require(:lightnovel).permit(:name, :description, :home_url, :is_translated, :raws_url, :number_of_chapters, chapter_attribute: [:chapter_number, :chapter_name, :chapter_url])
 		end
 end

@@ -38,9 +38,7 @@ class CheckLatestChapter
             end
             ## check if the next chapter is blank or not ## check if the next chapter is a link ## check if the next chapter link is the same as the present chapter
             if ((next_chapter_text).blank?) || (next_chapter_link).blank? || (@current_chapter_url == (next_chapter_link))
-                if @lightnovel.number_of_chapters < current_chapter_number
-                    @lightnovel.update_attributes(:number_of_chapters => current_chapter_number)
-                end
+                update_lightnovel_chapternumber_lastmod(current_chapter_number)
     	    else 
                 ## Populate the next chapter number and the next chapter url fields
                 chapter_number = next_chapter_number
@@ -55,6 +53,17 @@ class CheckLatestChapter
                 ## Recursively call the function until the next chapter URL is blank
                 perform(next_chapter_number, @lightnovel.id)
             end
+	    else
+            update_lightnovel_chapternumber_lastmod(current_chapter_number)
 	    end
+    end
+    
+    def update_lightnovel_chapternumber_lastmod(current_chapter_number)
+        if @lightnovel.number_of_chapters < current_chapter_number
+            update_chapter_number = current_chapter_number
+        else
+            update_chapter_number = @lightnovel.number_of_chapters
+        end
+        @lightnovel.update_attributes(:number_of_chapters => current_chapter_number, :last_modified => Time.now)
     end
 end
