@@ -37,6 +37,7 @@ class SeedLightnovelRoyalroadl
 	                # puts ">>>>>#{chapter_name}>>#{chapter_url}<<<<>>#{chapter_number}<<<<<lightnovel.id<<<<"   
 	                ## Create the new chapter in the database	            
 	                @chapter = Chapter.create :lightnovel => @lightnovel, :chapter_name => chapter_name, :chapter_number => chapter_number, :chapter_url => chapter_url
+	                puts ">>>chapter>>>#{@chapter.chapter_name}<<<<>>>>#{@chapter.chapter_url}"
 	                ##>>>>>>>>>>Add a scheduled task to recursively add new chapters to the database<<<<<<<<<<<<<<
 	                CheckLatestChapter.perform_async(chapter_number, @lightnovel.id)
 	                # CheckLatestChapter.perform_in(1.hour, chapter_number, @lightnovel.id)

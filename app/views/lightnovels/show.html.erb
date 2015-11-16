@@ -61,7 +61,6 @@
                 <td><%= chapter.chapter_number %></td>
                 <td><%= chapter.chapter_name %></td>
                 <td><%= chapter.created_at.to_date %></td>
-                <td><%= chapter.chapter_url %></td>
                 <td><%= link_to 'Chapter Link', extlink(chapter.chapter_url) %></td>
                 <!--chapter.chapter_url -->
                 <% if @lightnovel.is_translated == true %>
