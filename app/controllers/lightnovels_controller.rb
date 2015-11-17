@@ -67,6 +67,6 @@ class LightnovelsController < ApplicationController
 
 		def lightnovel_params
 			logger.debug ">>>>lightnovel_params>>>>>>>#{params[:lightnovel]}<<<<<<<<<<"
-			params.require(:lightnovel).permit(:name, :description, :home_url, :is_translated, :raws_url, :number_of_chapters, chapter_attribute: [:chapter_number, :chapter_name, :chapter_url])
+			params.require(:lightnovel).permit(:name, :description, :home_url, :is_translated, :raws_url, :number_of_chapters, :selector_next_chapter, :selector_name, chapter_attribute: [:chapter_number, :chapter_name, :chapter_url])
 		end
 end
