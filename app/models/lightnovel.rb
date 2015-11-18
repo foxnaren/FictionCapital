@@ -3,7 +3,7 @@ class Lightnovel < ActiveRecord::Base
 	
 	validates :name, presence: true
 	validates :description, presence: true
-	validates :home_url, presence: true
+	validates :home_url, presence: true, uniqueness: true
 	#validates :is_translated, presence: true
 	validates :raws_url, presence: true, if: :translated?
 	

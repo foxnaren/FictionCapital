@@ -24,6 +24,14 @@
       <%= f.text_field :raws_url %>
     </div>
   </div>
+  <div class="field">
+    <%= f.label :next_chapter_selector %><br>
+    <%= f.text_field :selector_next_chapter %>
+  </div>  
+  <div class="field">
+    <%= f.label :name_selector %><br>
+    <%= f.text_field :selector_name %>
+  </div>  
   <%= f.fields_for :chapter_attribute do |c| %>
     <!--<fieldset>-->
       <%= c.hidden_field :chapter_number, value: 1 %>

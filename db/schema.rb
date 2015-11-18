@@ -39,28 +39,20 @@ ActiveRecord::Schema.define(version: 20151101021534) do
   end
 
   create_table "lightnovels", force: :cascade do |t|
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.string   "name",                                               null: false
-    t.string   "description",                                        null: false
-    t.string   "home_url",                                           null: false
-    t.boolean  "is_translated",      default: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.string   "name",                                                  null: false
+    t.string   "description",                                           null: false
+    t.string   "home_url",                                              null: false
+    t.boolean  "is_translated",         default: false
     t.string   "raws_url"
-    t.integer  "number_of_chapters", default: 0
-    t.datetime "last_modified",      default: '2015-11-10 01:00:34'
+    t.integer  "number_of_chapters",    default: 0
+    t.datetime "last_modified",         default: '2015-11-18 08:39:40'
+    t.string   "selector_next_chapter",                                 null: false
+    t.string   "selector_name",                                         null: false
   end
 
   add_index "lightnovels", ["name"], name: "index_lightnovels_on_name", using: :btree
-
-  create_table "selectors", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "url_base",   null: false
-    t.string   "selector",   null: false
-    t.string   "name",       null: false
-  end
-
-  add_index "selectors", ["url_base"], name: "index_selectors_on_url_base", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
