@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.boolean  "is_translated",         default: false
     t.string   "raws_url"
     t.integer  "number_of_chapters",    default: 0
-    t.datetime "last_modified",         default: '2015-11-16 08:26:43'
+    t.datetime "last_modified",         default: '2015-11-18 08:39:40'
     t.string   "selector_next_chapter",                                 null: false
     t.string   "selector_name",                                         null: false
   end

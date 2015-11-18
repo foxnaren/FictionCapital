@@ -20,7 +20,13 @@ class LightnovelsController < ApplicationController
 	def show
 		# @lightnovel set by privat method
 		@chapters = @lightnovel.chapters.order(chapter_number: :desc)
-		CheckLatestChapter.perform_async(@chapters.first.chapter_number, @lightnovel.id)
+		if ((Time.parse(Time.now.to_s) - Time.parse(@lightnovel.last_modified.to_s))/3600) > 1
+			logger.debug "+++++++++++Task Scheduled+++++#{((Time.parse(Time.now.to_s) - Time.parse(@lightnovel.last_modified.to_s))/3600)}++++++"
+			CheckLatestChapter.perform_async(@chapters.first.chapter_number, @lightnovel.id)
+		# end
+		else
+		logger.debug "+++++++++++Task Scheduled NOT++++#{((Time.parse(Time.now.to_s) - Time.parse(@lightnovel.last_modified.to_s))/3600)}+++++++"
+		end
 	end
 
 	# def edit

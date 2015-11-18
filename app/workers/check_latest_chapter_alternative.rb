@@ -41,7 +41,17 @@ class CheckLatestChapterAlternative
                 ## Populate the next chapter number and the next chapter url fields
                 chapter_number = next_chapter_number
                 ## Open the next chapter page
-                @doc = Nokogiri::HTML(open(next_chapter_link))
+                begin
+                    @doc = Nokogiri::HTML(open(next_chapter_link))
+                    rescue OpenURI::HTTPError => e
+                        if e.message == '404 Not Found'
+                            update_lightnovel_chapternumber_lastmod(current_chapter_number)                            
+                            # puts "+++++++++++++++++++++++stop thrown+++++++#{current_chapter_number}++++++++++++"
+                            throw :stop
+                        else
+                            raise e
+                        end
+                end 
                 # puts "#{next_chapter_link}"
                 ## Populate the next chapter name from the newly opened page
                 chapter_name = @doc.at_css(@lightnovel.selector_name).text

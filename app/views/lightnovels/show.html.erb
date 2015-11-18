@@ -1,36 +1,37 @@
-<% cache @chapters do %>
-  <% cache @lightnovel do %>
-    <p>
-      <strong>Name : </strong>
-      <%= @lightnovel.name %>
-    </p>
+  <% logger.debug ">>>lightnovel#showtest>>>>>>>#{@lightnovel.is_translated}<<<<<<<<<<<<<" %>
+
+<% cache @lightnovel do %>
+  <p>
+    <strong>Name : </strong>
+    <%= @lightnovel.name %>
+  </p>
+
+  <p>
+    <strong>Description : </strong>
+    <%= @lightnovel.description %>
+  </p>
   
-    <p>
-      <strong>Description : </strong>
-      <%= @lightnovel.description %>
-    </p>
-    
-    <p>
-    	<strong>Homepage : </strong>
-    	<%= link_to 'Link', extlink(@lightnovel.home_url) %>
-    	<!--@lightnovel.home_url-->
-    </p>
-    <% logger.debug ">>>lightnovel#show>>>>>>>#{@lightnovel.is_translated}<<<<<<<<<<<<<" %>
-    <% logger.debug ">>>@lightnovel.home_url>>>>>>>#{@lightnovel.home_url}<<<<<<<<<<<<<" %>
- 
-    <% if @lightnovel.is_translated == true %>
-    	<p>
-      		<strong>Raws : </strong>
-      		<%= link_to 'Link', extlink(@lightnovel.raws_url)  %>
-      		<!--@lightnovel.raws_url-->
-    	</p>
-    <% end %>
-    
-    <%= link_to 'Edit', edit_lightnovel_path(@lightnovel) %> |
-    <%= link_to 'Back', lightnovels_path %>
-    
+  <p>
+  	<strong>Homepage : </strong>
+  	<%= link_to 'Link', extlink(@lightnovel.home_url) %>
+  	<!--@lightnovel.home_url-->
+  </p>
+  <% logger.debug ">>>lightnovel#show>>>>>>>#{@lightnovel.is_translated}<<<<<<<<<<<<<" %>
+  <% logger.debug ">>>@lightnovel.home_url>>>>>>>#{@lightnovel.home_url}<<<<<<<<<<<<<" %>
+
+  <% if @lightnovel.is_translated == true %>
+  	<p>
+    		<strong>Raws : </strong>
+    		<%= link_to 'Link', extlink(@lightnovel.raws_url)  %>
+    		<!--@lightnovel.raws_url-->
+  	</p>
   <% end %>
   
+  <%= link_to 'Edit', edit_lightnovel_path(@lightnovel) %> |
+  <%= link_to 'Back', lightnovels_path %>
+  
+<% end %>
+<% cache @chapters do %>
   <div class = "latest_chapters">
     <p>
       <strong>Latest Chapters : </strong>
