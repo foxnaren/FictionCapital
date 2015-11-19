@@ -47,9 +47,10 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.boolean  "is_translated",         default: false
     t.string   "raws_url"
     t.integer  "number_of_chapters",    default: 0
-    t.datetime "last_modified",         default: '2015-11-18 08:39:40'
+    t.datetime "last_modified",         default: '2015-11-19 00:19:21'
     t.string   "selector_next_chapter",                                 null: false
     t.string   "selector_name",                                         null: false
+    t.string   "lightnovel_type",                                       null: false
   end
 
   add_index "lightnovels", ["name"], name: "index_lightnovels_on_name", using: :btree
