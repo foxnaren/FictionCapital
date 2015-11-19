@@ -16,5 +16,6 @@ class CreateLightnovels < ActiveRecord::Migration
       t.string :lightnovel_type, null: false
     end
     add_index(:lightnovels, :name)
+    add_index(:lightnovels, :home_url)
   end
 end
