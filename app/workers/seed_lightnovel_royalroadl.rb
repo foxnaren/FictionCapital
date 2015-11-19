@@ -18,7 +18,7 @@ class SeedLightnovelRoyalroadl
 		    url = "http://royalroadl.com/fiction/#{fictionID}"
 		    # puts ">>>>>url>>>>#{url}<<<<<<<<<"
 	        ## Check if the URL exsists in the database
-	        if Lightnovel.find_by(home_url: url).nil?
+	        if Lightnovel.find_by(home_url: url).blank?
 	            ## If it exsists then open it via Nokogiri
 		    	doc = Nokogiri::HTML(open(url))
 	            ## Check if the fiction-title and chapter exsists in the URL opened
@@ -34,7 +34,7 @@ class SeedLightnovelRoyalroadl
 		            selector_next_chapter = "td:nth-child(3) a"
 		            selector_name = "div.largetext"
 	                ## Create the new Light novel in the database	            
-	    		    @lightnovel = Lightnovel.create :name => title, :description => description, :home_url => url, :number_of_chapters => 1, :selector_next_chapter => selector_next_chapter, :selector_name => selector_name
+	    		    @lightnovel = Lightnovel.create :name => title, :description => description, :home_url => url, :number_of_chapters => 1, :selector_next_chapter => selector_next_chapter, :selector_name => selector_name, lightnovel_type: "Lightnovel"
 	                ## Populate the first chapter URL, name and number                    
 	    		    chapter_url = doc.at_css(".chapter:nth-child(1) a")['href'] 
 	    		    chapter_name = doc.at_css(".chapter:nth-child(1) span:nth-child(1)").text
@@ -51,9 +51,9 @@ class SeedLightnovelRoyalroadl
 	    	            total_royalroadl_fiction = total_royalroadl_fiction + 50
 	                end
 	            end
-	            puts "+++++#{fictionID}+++++++#{total_royalroadl_fiction}++++++"
+	            # puts "+++++#{fictionID}+++++++#{total_royalroadl_fiction}++++++"
 	        else
-	    	    puts "****#{fictionID}******#{total_royalroadl_fiction}*****"
+	    	    # puts "****#{fictionID}******#{total_royalroadl_fiction}*****"
 	            if (total_royalroadl_fiction-fictionID)<=50
 	    	        total_royalroadl_fiction = total_royalroadl_fiction + 50
 	            end

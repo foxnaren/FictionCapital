@@ -45,3 +45,6 @@ p:nth-child(1) span a
 .entry-title
 Prologue
 http://www.wuxiaworld.com/atg-index/prologue/
+
+
+        @lightnovel = Lightnovel.create name: "0.0 Mhz", description: description, home_url: home_url, number_of_chapters: number_of_chapters, selector_next_chapter: "manga", selector_name: "manga", lightnovel_type: "manga"
