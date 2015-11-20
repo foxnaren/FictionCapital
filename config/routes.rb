@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :lightnovels do 
       resources :chapters    
   end
+  get '/lightnovel/:id/follow' => 'lightnovels#follow', as: :follow_lightnovel
+  get '/lightnovel/:id/unfollow' => 'lightnovels#unfollow', as: :unfollow_lightnovel
+  
   mount Sidekiq::Web, at: '/sidekiq'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
