@@ -31,6 +31,9 @@
   <%= link_to 'Back', lightnovels_path %>
   
 <% end %>
+
+<br/><%= render 'follow_form' if user_signed_in? %>    
+
 <% cache @chapters do %>
   <div class = "latest_chapters">
     <p>
