@@ -28,7 +28,7 @@ class SeedLightnovelMangareader
     	        	chapter_url = base_url + chapter['href'] 
         	    	# puts ">>>>>#{chapter_url}"
         	    	if @lightnovel.chapters.find_by(chapter_number: chapter_number).blank?
-	            		@chapter = Chapter.create :lightnovel => @lightnovel, :chapter_name => chapter_name, :chapter_number => chapter_number, :chapter_url => chapter_url
+	            		@chapter = Chapter.create :lightnovel => @lightnovel, lightnovel_name: @lightnovel.name, :chapter_name => chapter_name, :chapter_number => chapter_number, :chapter_url => chapter_url
 	            	end
             		# puts "#{chapter_number}"
             		chapter_number = chapter_number + 1

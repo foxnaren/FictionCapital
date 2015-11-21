@@ -9,6 +9,9 @@ class Lightnovel < ActiveRecord::Base
 	
 	has_many :chapters, :dependent => :destroy
 	accepts_nested_attributes_for :chapters
+	
+ 	has_many :follows
+	has_many :users, through: :follows
 
 	def slug
 		name.parameterize

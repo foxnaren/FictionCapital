@@ -11,18 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151101021534) do
+ActiveRecord::Schema.define(version: 20151119235803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "chapters", force: :cascade do |t|
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "lightnovel_id",  null: false
-    t.string   "chapter_name",   null: false
-    t.integer  "chapter_number", null: false
-    t.string   "chapter_url",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "lightnovel_id",   null: false
+    t.string   "lightnovel_name", null: false
+    t.string   "chapter_name",    null: false
+    t.integer  "chapter_number",  null: false
+    t.string   "chapter_url",     null: false
     t.string   "raws_url"
   end
 
@@ -38,6 +39,17 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+    t.integer  "lightnovel_id"
+  end
+
+  add_index "follows", ["lightnovel_id"], name: "index_follows_on_lightnovel_id", using: :btree
+  add_index "follows", ["user_id", "lightnovel_id"], name: "index_follows_on_user_id_and_lightnovel_id", unique: true, using: :btree
+  add_index "follows", ["user_id"], name: "index_follows_on_user_id", using: :btree
+
   create_table "lightnovels", force: :cascade do |t|
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
@@ -47,7 +59,7 @@ ActiveRecord::Schema.define(version: 20151101021534) do
     t.boolean  "is_translated",         default: false
     t.string   "raws_url"
     t.integer  "number_of_chapters",    default: 0
-    t.datetime "last_modified",         default: '2015-11-19 11:57:19'
+    t.datetime "last_modified",         default: '2015-11-21 01:27:26'
     t.string   "selector_next_chapter",                                 null: false
     t.string   "selector_name",                                         null: false
     t.string   "lightnovel_type",                                       null: false
@@ -55,6 +67,17 @@ ActiveRecord::Schema.define(version: 20151101021534) do
 
   add_index "lightnovels", ["home_url"], name: "index_lightnovels_on_home_url", using: :btree
   add_index "lightnovels", ["name"], name: "index_lightnovels_on_name", using: :btree
+
+  create_table "unreads", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "chapter_id"
+  end
+
+  add_index "unreads", ["chapter_id"], name: "index_unreads_on_chapter_id", using: :btree
+  add_index "unreads", ["user_id", "chapter_id"], name: "index_unreads_on_user_id_and_chapter_id", unique: true, using: :btree
+  add_index "unreads", ["user_id"], name: "index_unreads_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

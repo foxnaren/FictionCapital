@@ -14,6 +14,18 @@ Controller - Plural - eg Lightnovels,
                     make
         II) Test installation:  make test
         III) Run reddis : redis-server
+        
+        For C9:
+        
+        CREATE USER username SUPERUSER PASSWORD 'password';
+        
+        sudo service postgresql start
+        sudo sudo -u postgres psql
+        CREATE USER username SUPERUSER PASSWORD 'password';
+        \q
+        CREATE USER username SUPERUSER;
+        UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
+        
     b) Sidekiq
         I) bundle exec sidekiq
 
@@ -48,3 +60,32 @@ http://www.wuxiaworld.com/atg-index/prologue/
 
 
         @lightnovel = Lightnovel.create name: "0.0 Mhz", description: description, home_url: home_url, number_of_chapters: number_of_chapters, selector_next_chapter: "manga", selector_name: "manga", lightnovel_type: "manga"
+        
+        
+    <%= render 'follow_form' if logged_in? %>    
+        
+        <% unless current_user?(@user) %>
+  <div id="follow_form">
+  <% if current_user.following?(@user) %>
+    <%= render 'unfollow' %>
+  <% else %>
+    <%= render 'follow' %>
+  <% end %>
+  </div>
+<% end %>
+
+<%= form_for(current_user.active_relationships.build) do |f| %>
+  <div><%= hidden_field_tag :followed_id, @user.id %></div>
+  <%= f.submit "Follow", class: "btn btn-primary" %>
+<% end %>
+
+<%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
+             html: { method: :delete }) do |f| %>
+  <%= f.submit "Unfollow", class: "btn" %>
+<% end %>
+
+
+
+
+
+
