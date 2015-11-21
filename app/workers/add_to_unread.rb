@@ -10,7 +10,7 @@ class AddToUnread
         
         @all_users.each do |user|
             
-            Unread.create(user: user, chapter:)
+            Unread.create(user: user, chapter: @chapter)
             
         end
         
