@@ -5,6 +5,12 @@ class LightnovelsController < ApplicationController
 	# :edit,
 	before_action :set_lightnovel, only: [:show, :update, :destroy, :follow, :unfollow]
 
+	def home
+		
+		@all_followed = current_user.lightnovels
+		@all_unread = current_user.chapters
+
+	end
 
 	def follow
 		if Follow.find_by(user: current_user, lightnovel: @lightnovel).nil?

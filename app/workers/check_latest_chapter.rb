@@ -31,7 +31,12 @@ class CheckLatestChapter
                 current_chapter_number = current_chapter_number + 1 
                 chapter_name = chapter.text
                 chapter_url = "http://www.mangareader.net" + chapter['href'] 
-                @chapter = Chapter.create :lightnovel => @lightnovel, :chapter_name => chapter_name, :chapter_number => current_chapter_number, :chapter_url => chapter_url
+                @chapter = Chapter.create :lightnovel => @lightnovel, :lightnovel_name => @lightnovel.name, :chapter_name => chapter_name, :chapter_number => current_chapter_number, :chapter_url => chapter_url
+                
+                add_unread(@lightnovel.id, @chapter.id)
+                
+	           # AddToUnread.perform_async(@lightnovel, @chapter)
+	            # CheckLatestChapter.perform_in(2.hour, chapter_number, @lightnovel.id)                
             end
         end
         update_lightnovel_chapternumber_lastmod(current_chapter_number)
@@ -58,7 +63,8 @@ class CheckLatestChapter
                 @doc = Nokogiri::HTML(open(@current_chapter_url)) 
             end
             logger.debug ">>>>>>>>>>>>>>><<<<<<<<<<<<<<<"
-
+            # Alternative selector:
+            # @lightnovel.selector_next_chapter = "tr:nth-child(2) td:nth-child(3) a"
            	next_chapter_text = @doc.at_css(@lightnovel.selector_next_chapter)
 
             unless next_chapter_text.blank?
@@ -87,8 +93,11 @@ class CheckLatestChapter
                     ## Populate the next chapter name from the newly opened page
                     chapter_name = @doc.at_css(@lightnovel.selector_name).text
                     ## Create a new entry into the database
-                    Chapter.create lightnovel: @lightnovel, chapter_name: chapter_name, chapter_number: chapter_number, chapter_url: next_chapter_link
+                    Chapter.create lightnovel: @lightnovel, lightnovel_name: @lightnovel.name, chapter_name: chapter_name, chapter_number: chapter_number, chapter_url: next_chapter_link
                     # puts ">>>#{lightnovel.name}>>>>>#{chapter_number}>>>>>#{chapter_url}<<<<<<<<<<"
+                    
+                    add_unread(@lightnovel.id, @chapter.id)
+                    
                     @current_chapter_url = next_chapter_link
                     ## Recursively call the function until the next chapter URL is blank
                     perform_lightnovel(next_chapter_number, @lightnovel.id)
@@ -98,6 +107,13 @@ class CheckLatestChapter
             logger.info "ERROR: #{current_chapter_number}, #{id}, Next chapter was present in db"
             update_lightnovel_chapternumber_lastmod(current_chapter_number)
 	    end
+    end
+    
+    def add_unread(lightnovel, chapter)
+        
+        ##>>>>>>>>>>Add a scheduled task add current chapter to unread lists of followers<<<<<<<<<<<<<<
+        AddToUnread.perform_async(lightnovel, chapter)       
+        
     end
     
     def update_lightnovel_chapternumber_lastmod(current_chapter_number)
