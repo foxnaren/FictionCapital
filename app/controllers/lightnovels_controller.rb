@@ -14,6 +14,21 @@ class LightnovelsController < ApplicationController
 	end
 
 	def unread
+		# @disp_name = nil
+	end
+
+	def mark_as_read
+		if params[:range] == "chapter"
+			read = Unread.find_by(user: current_user, chapter: params[:id])
+		else
+			read = Unread.where(lightnovel_name: params[:lightnovel_name])
+		end
+			unless read.blank?
+				read.each do |r|
+					r.destroy
+				end
+			end
+		redirect_to :back, notice: "Marked as Read"
 		
 	end
 
@@ -29,8 +44,9 @@ class LightnovelsController < ApplicationController
 	end
 
 	def unfollow
-		unless Follow.find_by(user: current_user, lightnovel: @lightnovel).nil?
-			Follow.find_by(user: current_user, lightnovel: @lightnovel).destroy
+		unfollow = Follow.find_by(user: current_user, lightnovel: @lightnovel)
+		unless unfollow.nil?
+			unfollow.destroy
 		end
 		redirect_to :back, notice: "You have unfollowed #{@lightnovel.name}"
 	end
@@ -42,7 +58,8 @@ class LightnovelsController < ApplicationController
  		unless @link.include?("http://") || @link.include?("https://")
   			@link.insert(0, "http://")
  		end	
-		
+
+ 		redirect_to @link
 	end
 
 	def index
@@ -107,7 +124,7 @@ class LightnovelsController < ApplicationController
 
 		def set_unread_count
 			@all_unread = current_user.chapters.order(lightnovel_name: :desc, chapter_number: :asc).paginate(:per_page => 20, :page => params[:page])
-			@all_unread_first = @all_unread.first
+			# @all_unread_first = @all_unread.first
 			@all_unread_count = @all_unread.count
 		end
 		

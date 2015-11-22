@@ -1,3 +1,5 @@
+<h1>My Followed Novels/Manga</h1>
+
 <% if @all_followed.blank? %>
     <p>You have not followed anything.</p>
 <% else %>
@@ -8,7 +10,6 @@
                     <th>Name</th>
                     <th>Total Number Of Chapters</th>
                     <th>Type</th>
-                    <th>Home URL</th>                    
                     <th>Follow/Unfollow</th>
                     <th colspan="3"></th>
                 </tr>
@@ -17,11 +18,9 @@
                 <% @all_followed.each do |lightnovel| %>
                     <% cache ["single", lightnovel] do %>
                         <tr>
-                            <td><%= lightnovel.name %></td>
+                            <td><%= link_to "#{lightnovel.name}", lightnovel %></td>
                             <td><%= lightnovel.number_of_chapters %></td>
                             <td><%= lightnovel.lightnovel_type %></td>
-                            <td><%= link_to 'Home', extlink(lightnovel.home_url) %></td>
-
                             <td><%= link_to 'unfollow', unfollow_lightnovel_path(id: lightnovel.id, anchor: "followed_#{@previous_lightnovel}") %></td>
                             <!--chapter.chapter_url -->
                             <% @previous_lightnovel = lightnovel.id%>

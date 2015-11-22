@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get "/unread" => "lightnovels#unread", as: :unreads
   get "/followed" => "lightnovels#followed", as: :followed 
   get "/render_chapter" => "lightnovels#render_chapter", as: :render_chapter 
+  get "/mark_as_read" => "lightnovels#mark_as_read", as: :mark_as_read 
+  
   
   mount Sidekiq::Web, at: '/sidekiq'
   # The priority is based upon order of creation: first created -> highest priority.
