@@ -1,0 +1,34 @@
+<% if @all_unread.blank? %>
+    <p>You have read. Consider following more Novels or Manga.</p>
+<% else %>
+    <% cache @all_unread do %>
+        <br/><%= will_paginate @all_unread %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Lightnovel Name</th>
+                    <th>Chapter Number</th>
+                    <th>Chapter Name</th>
+                    <th>Added On</th>
+                    <th>Raws Link</th>
+                    <th colspan="3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @all_unread.each do |unreadchapter| %>
+                    <% cache ["single", unreadchapter] do %>
+                        <tr>
+                            <td><%= unreadchapter.lightnovel_name %></td>
+                            <td><%= unreadchapter.chapter_number %></td>
+                            <td><%= unreadchapter.chapter_name %></td>
+                            <td><%= unreadchapter.created_at.to_date %></td>
+                            <td><%= link_to 'Chapter Link', extlink(unreadchapter.chapter_url) %></td>
+                            <!--chapter.chapter_url -->
+                        </tr>
+                    <% end %>
+                <% end %>
+            </tbody>
+        </table>
+        <br/><%= will_paginate @all_unread %>
+    <% end %>        
+<% end %>
