@@ -36,4 +36,12 @@ class SeedLightnovelMangareader
             end
         end
 	end
+
+    def open_url(url)
+        doc = ''
+        open(url) do |fi|
+            doc = Nokogiri::HTML(fi)
+        end
+        doc
+    end
 end

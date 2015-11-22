@@ -1,12 +1,13 @@
-require 'rubygems'
+
+desc "Used for testing"
+task :testingthis => :environment do
+
+	require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
-## need to test the changes
-#test comment
-class CheckLatestChapter
-    include Sidekiq::Worker
 
-    def perform(current_chapter_number, id)
+	current_chapter_number = 252
+	id = 2365
 
         @lightnovel = Lightnovel.find(id)
         if @lightnovel.lightnovel_type == "Lightnovel"
@@ -14,36 +15,11 @@ class CheckLatestChapter
         elsif @lightnovel.lightnovel_type == "Manga"
             perform_manga(current_chapter_number, id)            
         end
-    end
-
-    def perform_manga(current_chapter_number, id)
-        ## Populate lightnovel and calculate the next chapter number
-        if @lightnovel.blank?
-            @lightnovel = Lightnovel.find(id)
-        end        
-        #Open the home url for the manga
-        open_url(@lightnovel.home_url)
-        #Check if the number of chapters in site is greater than the current chapter number that has been passed
-        if @doc.css("#listing a").count > current_chapter_number
-            #Loop through all the entries that are not there *** the index starts at 0
-           @doc.css("#listing a")[(current_chapter_number) .. (@doc.css("#listing a").count-1)].each do |chapter|
-               #Need to increment since it was not incremented for index starting from 0
-                current_chapter_number = current_chapter_number + 1 
-                chapter_name = chapter.text
-                chapter_url = "http://www.mangareader.net" + chapter['href'] 
-                @chapter = Chapter.create :lightnovel => @lightnovel, :lightnovel_name => @lightnovel.name, :chapter_name => chapter_name, :chapter_number => current_chapter_number, :chapter_url => chapter_url
-                
-                add_unread(@lightnovel.id, @chapter.id)
-                
-	           # AddToUnread.perform_async(@lightnovel, @chapter)
-	            # CheckLatestChapter.perform_in(2.hour, chapter_number, @lightnovel.id)                
-            end
-        end
-        update_lightnovel_chapternumber_lastmod(current_chapter_number)
-    end
-
     ## Input current_chapter_number: From @chapters.first.chapter_number, lightnovel_id: from the controller
-    def perform_lightnovel(current_chapter_number, id)
+    
+end
+
+def perform_lightnovel(current_chapter_number, id)
         ## Populate lightnovel and calculate the next chapter number
         if @lightnovel.blank?
             @lightnovel = Lightnovel.find(id)
@@ -60,9 +36,10 @@ class CheckLatestChapter
 
             ## open the website
             if @doc.blank?
+            	puts ">>>>>>>>>>#{@current_chapter_url}"
                 open_url(@current_chapter_url)
             end
-            logger.debug ">>>>>>>>>>>>>>><<<<<<<<<<<<<<<"
+            # logger.debug ">>>>>>>>>>>>>>><<<<<<<<<<<<<<<"
             # Alternative selector:
             # @lightnovel.selector_next_chapter = "tr:nth-child(2) td:nth-child(3) a"
            	next_chapter_text = @doc.at_css(@lightnovel.selector_next_chapter)
@@ -83,7 +60,7 @@ class CheckLatestChapter
                         rescue OpenURI::HTTPError => e
                             if e.message == '404 Not Found'
                                 update_lightnovel_chapternumber_lastmod(current_chapter_number)                            
-                                # puts "+++++++++++++++++++++++stop thrown+++++++#{current_chapter_number}++++++++++++"
+                                puts "+++++++++++++++++++++++stop thrown+++++++#{current_chapter_number}++++++++++++"
                                 # logger.debug "+++++++++++++stop thrown+++++++#{current_chapter_number}+++++"
                                 throw :stop
                             else
@@ -105,7 +82,7 @@ class CheckLatestChapter
                 end
             end
 	    else
-            logger.info "ERROR: #{current_chapter_number}, #{id}, Next chapter was present in db"
+            # logger.info "ERROR: #{current_chapter_number}, #{id}, Next chapter was present in db"
             update_lightnovel_chapternumber_lastmod(current_chapter_number)
 	    end
     end
@@ -118,6 +95,8 @@ class CheckLatestChapter
     end
 
     def open_url(url)
+    	puts "open url<<<<<<<<<<<<<<<<<<<<<<<"
+    	# @doc = Nokogiri::HTML(open(url))
         @doc = ''
         open(url) do |fi|
             @doc = Nokogiri::HTML(fi)
@@ -132,4 +111,3 @@ class CheckLatestChapter
         end
         @lightnovel.update_attributes(:number_of_chapters => update_chapter_number, :last_modified => Time.now)
     end
-end
