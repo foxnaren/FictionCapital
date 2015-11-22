@@ -20,7 +20,7 @@ class SeedLightnovelRoyalroadl
 	        ## Check if the URL exsists in the database
 	        if Lightnovel.find_by(home_url: url).blank?
 	            ## If it exsists then open it via Nokogiri
-		    	doc = Nokogiri::HTML(open(url))
+		    	doc = open_url(url)
 	            ## Check if the fiction-title and chapter exsists in the URL opened
 	            if (doc.at_css(".fiction-title") != nil) && (doc.at_css(".chapter:nth-child(1) a") != nil)
 	                # sleep(5)
@@ -60,5 +60,13 @@ class SeedLightnovelRoyalroadl
 	        end    
 	        fictionID = fictionID+1
 	    end
+    end
+
+    def open_url(url)
+        doc = ''
+        open(url) do |fi|
+            doc = Nokogiri::HTML(fi)
+        end
+        doc
     end
 end

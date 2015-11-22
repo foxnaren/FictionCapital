@@ -8,14 +8,14 @@ class SeedLightnovelMangareader
 	def perform
     	base_url = "http://www.mangareader.net"
     	url = "http://www.mangareader.net/alphabetical"
-        doc = Nokogiri::HTML(open(url))
+        doc = open_url(url)
     	all_manga = doc.css(".series_alpha li a")
         all_manga.each do |manga|
         	name = manga.text
             home_url = base_url + manga["href"]
             if Lightnovel.find_by(home_url: home_url).blank?
             	# puts ">>>>>>>manga<<<<<<<"
-            	chapter_doc = Nokogiri::HTML(open(home_url))
+            	chapter_doc = open_url(home_url)
         		description = chapter_doc.at_css("p").text
         		if description.blank?
             		description = "None"
