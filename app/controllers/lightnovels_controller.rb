@@ -19,15 +19,16 @@ class LightnovelsController < ApplicationController
 
 	def mark_as_read
 		if params[:range] == "chapter"
-			read = Unread.find_by(user: current_user, chapter: params[:id])
+			read = Unread.find_by(user: current_user, chapter: params[:id]).destroy
 		else
 			read = Unread.where(lightnovel_name: params[:lightnovel_name])
-		end
 			unless read.blank?
 				read.each do |r|
 					r.destroy
 				end
 			end
+		end
+
 		redirect_to :back, notice: "Marked as Read"
 		
 	end

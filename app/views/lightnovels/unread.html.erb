@@ -9,10 +9,13 @@
         <table>
             <thead>
                 <tr>
-                    <th>Chapter Name</th>
-                    <th>Chapter Number</th>
-                    <th>Lightnovel Name</th>
-                    <th>Added On</th>
+                    <th>Added On</th>                
+                    <th>Lightnovel Name</th>        
+                    <th>Chapter Number</th>                                
+                    <th>Chapter Name (Opens in a new tab)</th>
+
+
+
                     <th colspan="3"></th>
                 </tr>
             </thead>
@@ -20,11 +23,14 @@
                 <% @all_unread.each do |unreadchapter| %>
                     <% cache ["single", unreadchapter] do %>
                         <tr>
-                            <td><%= link_to "#{unreadchapter.chapter_name}", render_chapter_path(chapter_url: unreadchapter.chapter_url) %></td>                  
-                            <td><%= unreadchapter.chapter_number %></td>
+                            <td><%= unreadchapter.created_at.to_date %></td>      
                             <td><%= link_to "#{unreadchapter.lightnovel_name}", lightnovel_path(id: unreadchapter.lightnovel_id) %></td>
+                            <td><%= unreadchapter.chapter_number %></td>                                                                          
+                            <td><%= link_to "#{unreadchapter.chapter_name}", render_chapter_path(chapter_url: unreadchapter.chapter_url),target: '_blank' %></td>                  
 
-                            <td><%= unreadchapter.created_at.to_date %></td>
+
+
+
                             <td><%= link_to "Mark Chapter as Read", mark_as_read_path(id: unreadchapter.id, range: "chapter", anchor: "mark_as_unread_#{unreadchapter.id}") %></td>
                             <td><%= link_to "Mark All as Read", mark_as_read_path(id: unreadchapter.id, range: "lightnovel", lightnovel_name: unreadchapter.lightnovel_name, anchor: "mark_all_as_unread_#{unreadchapter.id}") %></td>                            
                             <!--chapter.chapter_url -->
