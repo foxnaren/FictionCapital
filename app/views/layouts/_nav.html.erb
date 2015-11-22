@@ -3,7 +3,7 @@
       <li><%= link_to 'Home', home_path %></li>
       <li><%= link_to 'Index', lightnovels_path %></li>
       <li><%= link_to 'Followed Items', followed_path %></li>
-      <li><%= link_to "Unread Chapters (#{@all_unread_count})", unreads_path %></li>
+      <li><%= link_to "First Unread", render_chapter_path(chapter_url: @all_unread_first.chapter_url) %> - <%= link_to "#{@all_unread_count} Unread", unreads_path %></li>
       <li>
         <%= form_tag lightnovels_path, :method => 'get' do %>
       		 <p>

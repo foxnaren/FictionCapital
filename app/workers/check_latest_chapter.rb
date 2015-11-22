@@ -115,6 +115,13 @@ class CheckLatestChapter
         AddToUnread.perform_async(lightnovel, chapter)       
         
     end
+
+    def open_url(url)
+        @doc = ''
+        File.open(url, 'r') do |fi|
+            @doc = Nokogiri::HTML(fi)
+        end
+    end
     
     def update_lightnovel_chapternumber_lastmod(current_chapter_number)
         if @lightnovel.number_of_chapters < current_chapter_number

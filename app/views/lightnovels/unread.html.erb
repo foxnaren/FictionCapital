@@ -10,7 +10,6 @@
                     <th>Chapter Number</th>
                     <th>Chapter Name</th>
                     <th>Added On</th>
-                    <th>Raws Link</th>
                     <th colspan="3"></th>
                 </tr>
             </thead>
@@ -18,11 +17,10 @@
                 <% @all_unread.each do |unreadchapter| %>
                     <% cache ["single", unreadchapter] do %>
                         <tr>
-                            <td><%= unreadchapter.lightnovel_name %></td>
+                            <td><%= link_to "#{unreadchapter.lightnovel_name}", lightnovel_path(id: unreadchapter.lightnovel_id) %></td>
                             <td><%= unreadchapter.chapter_number %></td>
-                            <td><%= unreadchapter.chapter_name %></td>
+                            <td><%= link_to "#{unreadchapter.chapter_name}", render_chapter_path(chapter_url: unreadchapter.chapter_url) %></td>
                             <td><%= unreadchapter.created_at.to_date %></td>
-                            <td><%= link_to 'Chapter Link', extlink(unreadchapter.chapter_url) %></td>
                             <!--chapter.chapter_url -->
                         </tr>
                     <% end %>

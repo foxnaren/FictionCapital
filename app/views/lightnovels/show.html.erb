@@ -39,7 +39,7 @@
     <p>
       <strong>Latest Chapters : </strong>
       <% (@chapters.first(5)).each do |chapter| %>  
-        <%= link_to chapter.chapter_number, extlink(chapter.chapter_url) %>-
+        <%= link_to chapter.chapter_number, render_chapter_path(chapter_url: chapter.chapter_url) %>-
         <!--chapter.chapter_url-->
       <% end %>
     </p>
@@ -65,7 +65,7 @@
                 <td><%= chapter.chapter_number %></td>
                 <td><%= chapter.chapter_name %></td>
                 <td><%= chapter.created_at.to_date %></td>
-                <td><%= link_to 'Chapter Link', extlink(chapter.chapter_url) %></td>
+                <td><%= link_to 'Chapter Link', render_chapter_path(chapter_url: chapter.chapter_url) %></td>
                 <!--chapter.chapter_url -->
                 <% if @lightnovel.is_translated == true %>
                   <td><%= link_to 'Raws Link', extlink(chapter.raws_url) %></td>

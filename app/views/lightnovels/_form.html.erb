@@ -14,6 +14,10 @@
     <%= f.label :homepage %><br>
     <%= f.text_field :home_url %>
   </div>  
+   <div class="field">
+    <%= f.label :Type %><br>
+    <%= f.select :lightnovel_type, options_for_select(["Lightnovel", "Manga"]) %>
+  </div>  
   <div class="field">
     <%= f.label :is_translated %> 
     <%= f.check_box  :is_translated %>
@@ -34,7 +38,8 @@
   </div>  
   <%= f.fields_for :chapter_attribute do |c| %>
     <!--<fieldset>-->
-      <%= c.hidden_field :chapter_number, value: 1 %>
+    <%= c.hidden_field :lightnovel_name, value: :name %>
+    <%= c.hidden_field :chapter_number, value: 1 %>
       <div class="field">
         <%= c.label :first_chapter_name %><br>
         <%= c.text_field :chapter_name %>

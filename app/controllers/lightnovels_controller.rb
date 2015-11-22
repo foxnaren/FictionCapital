@@ -35,6 +35,16 @@ class LightnovelsController < ApplicationController
 		redirect_to :back, notice: "You have unfollowed #{@lightnovel.name}"
 	end
 
+	def render_chapter
+
+		@link = params[:chapter_url]
+
+ 		unless @link.include?("http://") || @link.include?("https://")
+  			@link.insert(0, "http://")
+ 		end	
+		
+	end
+
 	def index
 		logger.debug ">>>>>>>>>>>lightnovel-index<<<<<<<<<<"
 		@lightnovels = Lightnovel.search(params[:search]).order('LOWER(name)').paginate(:per_page => 20, :page => params[:page])
@@ -97,6 +107,7 @@ class LightnovelsController < ApplicationController
 
 		def set_unread_count
 			@all_unread = current_user.chapters.order(lightnovel_name: :desc, chapter_number: :asc).paginate(:per_page => 20, :page => params[:page])
+			@all_unread_first = @all_unread.first
 			@all_unread_count = @all_unread.count
 		end
 		
@@ -106,6 +117,6 @@ class LightnovelsController < ApplicationController
 
 		def lightnovel_params
 			logger.debug ">>>>lightnovel_params>>>>>>>#{params[:lightnovel]}<<<<<<<<<<"
-			params.require(:lightnovel).permit(:name, :description, :home_url, :is_translated, :raws_url, :number_of_chapters, :selector_next_chapter, :selector_name, :lightnovel_type, chapter_attribute: [:chapter_number, :chapter_name, :chapter_url])
+			params.require(:lightnovel).permit(:name, :description, :home_url, :is_translated, :raws_url, :number_of_chapters, :lightnovel_type, :selector_next_chapter, :selector_name, :lightnovel_type, chapter_attribute: [:lightnovel_name, :chapter_number, :chapter_name, :chapter_url])
 		end
 end

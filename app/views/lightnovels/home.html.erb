@@ -37,8 +37,8 @@
     <tbody>
         <% @latest_chapters.each do |chapter| %>
             <tr>
-                <td><%= link_to "#{chapter.lightnovel_name}", lightnovel_chapters_path(lightnovel_id: chapter.lightnovel_id) %></td>
-                <td><%= link_to "#{chapter.chapter_name}", lightnovel_chapters_path(lightnovel_id: chapter.lightnovel_id) %></td>
+                <td><%= link_to "#{chapter.lightnovel_name}", lightnovel_path(id: chapter.lightnovel_id) %></td>
+                <td><%= link_to "#{chapter.chapter_name}", render_chapter_path(chapter_url: chapter.chapter_url) %></td>
                 <td>
                     <% if current_user.lightnovels.find_by(id: chapter.lightnovel_id).nil? %>                
                         <%= link_to 'Follow', follow_lightnovel_path(id: chapter.lightnovel_id, anchor: "home_new_chapter_#{chapter.lightnovel_id}") %>
