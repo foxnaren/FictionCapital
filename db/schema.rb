@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20151119235803) do
     t.boolean  "is_translated",         default: false
     t.string   "raws_url"
     t.integer  "number_of_chapters",    default: 0
-    t.datetime "last_modified",         default: '2015-11-21 01:27:26'
+    t.datetime "last_modified",         default: '2015-11-21 23:48:32'
     t.string   "selector_next_chapter",                                 null: false
     t.string   "selector_name",                                         null: false
     t.string   "lightnovel_type",                                       null: false

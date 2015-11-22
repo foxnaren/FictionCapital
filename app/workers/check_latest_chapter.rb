@@ -93,7 +93,7 @@ class CheckLatestChapter
                     ## Populate the next chapter name from the newly opened page
                     chapter_name = @doc.at_css(@lightnovel.selector_name).text
                     ## Create a new entry into the database
-                    Chapter.create lightnovel: @lightnovel, lightnovel_name: @lightnovel.name, chapter_name: chapter_name, chapter_number: chapter_number, chapter_url: next_chapter_link
+                    @chapter = Chapter.create lightnovel: @lightnovel, lightnovel_name: @lightnovel.name, chapter_name: chapter_name, chapter_number: chapter_number, chapter_url: next_chapter_link
                     # puts ">>>#{lightnovel.name}>>>>>#{chapter_number}>>>>>#{chapter_url}<<<<<<<<<<"
                     
                     add_unread(@lightnovel.id, @chapter.id)

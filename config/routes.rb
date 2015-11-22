@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
 
   devise_for :users
-  root 'lightnovels#home'
+
   resources :examples
   resources :lightnovels do 
       resources :chapters    
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/lightnovel/:id/unfollow' => 'lightnovels#unfollow', as: :unfollow_lightnovel
   
   get "/home" => "lightnovels#home", as: :home
-  
+    root 'lightnovels#home'
   mount Sidekiq::Web, at: '/sidekiq'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

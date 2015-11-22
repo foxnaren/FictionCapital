@@ -41,11 +41,11 @@ class SeedLightnovelRoyalroadl
 	                chapter_number = 1
 	                # puts ">>>>>#{chapter_name}>>#{chapter_url}<<<<>>#{chapter_number}<<<<<lightnovel.id<<<<"   
 	                ## Create the new chapter in the database	            
-	                @chapter = Chapter.create :lightnovel => @lightnovel, :lightnovel_name => @lightnovel.name, :chapter_name => chapter_name, :chapter_number => chapter_number, :chapter_url => chapter_url
+	                @chapter = Chapter.create :lightnovel => @lightnovel, :chapter_name => chapter_name, :chapter_number => chapter_number, :chapter_url => chapter_url
 	                # puts ">>>chapter>>>#{@chapter.chapter_name}<<<<>>>>#{@chapter.chapter_url}"
 	                ##>>>>>>>>>>Add a scheduled task to recursively add new chapters to the database<<<<<<<<<<<<<<
-	            	CheckLatestChapter.perform_async(chapter_number, @lightnovel.id)
-	                # CheckLatestChapter.perform_in(2.hour, chapter_number, @lightnovel.id)
+	                # CheckLatestChapter.perform_async(chapter_number, @lightnovel.id)
+	                CheckLatestChapter.perform_in(2.hour, chapter_number, @lightnovel.id)
 	                ## If the chapter exsists check to update the condition
 	                if (total_royalroadl_fiction-fictionID)<=50
 	    	            total_royalroadl_fiction = total_royalroadl_fiction + 50
