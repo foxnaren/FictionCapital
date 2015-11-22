@@ -1,0 +1,24 @@
+<div id="user_nav">
+  <ul>
+      <li><%= link_to 'Home', home_path %></li>
+      <li><%= link_to 'Index', lightnovels_path %></li>
+      <li><%= link_to 'Followed Items', followed_path %></li>
+      <li><%= link_to "Unread Chapters (#{@all_unread_count})", unreads_path %></li>
+      <li>
+        <%= form_tag lightnovels_path, :method => 'get' do %>
+      		 <p>
+        		<%= text_field_tag :search, params[:search] %>
+        		<%= submit_tag "Search", :name => nil %>
+      		</p>
+    		<% end %>
+    		</li>
+      <li>  
+        <% if user_signed_in? %>
+          Signed in as <%= current_user.email %>. Not you?
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+        <% else %>
+          <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+        <% end %>
+        </li>
+  </ul>
+</div>

@@ -4,26 +4,35 @@ class LightnovelsController < ApplicationController
 	# before_action :set_user
 	# :edit,
 	before_action :set_lightnovel, only: [:show, :update, :destroy, :follow, :unfollow]
+	before_action :set_unread_count
 
 	def home
-		
-		@all_followed = current_user.lightnovels
-		@all_unread = current_user.chapters
+		@latest_lightnovels = Lightnovel.last(20)
+		@latest_chapters = Chapter.last(20)
+		@user = current_user
+		# need to add comments and reviews here
+	end
 
+	def unread
+		
+	end
+
+	def followed
+		@all_followed = current_user.lightnovels
 	end
 
 	def follow
 		if Follow.find_by(user: current_user, lightnovel: @lightnovel).nil?
 			Follow.create(user: current_user, lightnovel: @lightnovel)
 		end
-		redirect_to @lightnovel, notice: "You have followed #{@lightnovel.name}"
+		redirect_to :back, notice: "You have followed #{@lightnovel.name}"
 	end
 
 	def unfollow
 		unless Follow.find_by(user: current_user, lightnovel: @lightnovel).nil?
 			Follow.find_by(user: current_user, lightnovel: @lightnovel).destroy
 		end
-		redirect_to @lightnovel, notice: "You have unfollowed #{@lightnovel.name}"
+		redirect_to :back, notice: "You have unfollowed #{@lightnovel.name}"
 	end
 
 	def index
@@ -81,13 +90,14 @@ class LightnovelsController < ApplicationController
 
 	private
 		
-		# def set_user
-		# 	@user = current_user
-		# 	logger.debug ">>>>set_user>>>>>>>#{current_user}<<<<<<#{@user}<<#{user_signed_in?}<<"	
-		# end
 		def set_lightnovel
 			@lightnovel = Lightnovel.find(params[:id])	
 			logger.debug ">>>>set_lightnovel>>>>>>>#{@lightnovel.name}<<<<<<<<<<"		
+		end
+
+		def set_unread_count
+			@all_unread = current_user.chapters.order(lightnovel_name: :desc, chapter_number: :asc).paginate(:per_page => 20, :page => params[:page])
+			@all_unread_count = @all_unread.count
 		end
 		
 		def check_follow
