@@ -1,23 +1,66 @@
 class LightnovelsController < ApplicationController
 
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: [:home]
 	# before_action :set_user
 	# :edit,
 	before_action :set_lightnovel, only: [:show, :update, :destroy, :follow, :unfollow]
+	before_action :set_unread_count
 
+	def home
+		@latest_lightnovels = Lightnovel.last(20)
+		@latest_chapters = Chapter.last(20)
+		@user = current_user
+		# need to add comments and reviews here
+	end
+
+	def unread
+		# @disp_name = nil
+	end
+
+	def mark_as_read
+		if params[:range] == "chapter"
+			read = Unread.find_by(user: current_user, chapter: params[:id]).destroy
+		else
+			read = Unread.where(lightnovel_name: params[:lightnovel_name])
+			unless read.blank?
+				read.each do |r|
+					r.destroy
+				end
+			end
+		end
+
+		redirect_to :back, notice: "Marked as Read"
+		
+	end
+
+	def followed
+		@all_followed = current_user.lightnovels
+	end
 
 	def follow
 		if Follow.find_by(user: current_user, lightnovel: @lightnovel).nil?
 			Follow.create(user: current_user, lightnovel: @lightnovel)
 		end
-		redirect_to @lightnovel, notice: "You have followed #{@lightnovel.name}"
+		redirect_to :back, notice: "You have followed #{@lightnovel.name}"
 	end
 
 	def unfollow
-		unless Follow.find_by(user: current_user, lightnovel: @lightnovel).nil?
-			Follow.find_by(user: current_user, lightnovel: @lightnovel).destroy
+		unfollow = Follow.find_by(user: current_user, lightnovel: @lightnovel)
+		unless unfollow.nil?
+			unfollow.destroy
 		end
-		redirect_to @lightnovel, notice: "You have unfollowed #{@lightnovel.name}"
+		redirect_to :back, notice: "You have unfollowed #{@lightnovel.name}"
+	end
+
+	def render_chapter
+
+		@link = params[:chapter_url]
+
+ 		unless @link.include?("http://") || @link.include?("https://")
+  			@link.insert(0, "http://")
+ 		end	
+
+ 		redirect_to @link
 	end
 
 	def index
@@ -75,13 +118,17 @@ class LightnovelsController < ApplicationController
 
 	private
 		
-		# def set_user
-		# 	@user = current_user
-		# 	logger.debug ">>>>set_user>>>>>>>#{current_user}<<<<<<#{@user}<<#{user_signed_in?}<<"	
-		# end
 		def set_lightnovel
 			@lightnovel = Lightnovel.find(params[:id])	
 			logger.debug ">>>>set_lightnovel>>>>>>>#{@lightnovel.name}<<<<<<<<<<"		
+		end
+
+		def set_unread_count
+			if user_signed_in?
+				@all_unread = current_user.chapters.order(lightnovel_name: :desc, chapter_number: :asc).paginate(:per_page => 20, :page => params[:page])
+			# @all_unread_first = @all_unread.first
+				@all_unread_count = @all_unread.count
+			end
 		end
 		
 		def check_follow
@@ -90,6 +137,6 @@ class LightnovelsController < ApplicationController
 
 		def lightnovel_params
 			logger.debug ">>>>lightnovel_params>>>>>>>#{params[:lightnovel]}<<<<<<<<<<"
-			params.require(:lightnovel).permit(:name, :description, :home_url, :is_translated, :raws_url, :number_of_chapters, :selector_next_chapter, :selector_name, :lightnovel_type, chapter_attribute: [:chapter_number, :chapter_name, :chapter_url])
+			params.require(:lightnovel).permit(:name, :description, :home_url, :is_translated, :raws_url, :number_of_chapters, :lightnovel_type, :selector_next_chapter, :selector_name, :lightnovel_type, chapter_attribute: [:lightnovel_name, :chapter_number, :chapter_name, :chapter_url])
 		end
 end

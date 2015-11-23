@@ -14,6 +14,18 @@ Controller - Plural - eg Lightnovels,
                     make
         II) Test installation:  make test
         III) Run reddis : redis-server
+        
+        For C9:
+        
+        CREATE USER username SUPERUSER PASSWORD 'password';
+        
+        sudo service postgresql start
+        sudo sudo -u postgres psql
+        CREATE USER username SUPERUSER PASSWORD 'password';
+        \q
+        CREATE USER username SUPERUSER;
+        UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
+        
     b) Sidekiq
         I) bundle exec sidekiq
 
@@ -71,3 +83,16 @@ http://www.wuxiaworld.com/atg-index/prologue/
              html: { method: :delete }) do |f| %>
   <%= f.submit "Unfollow", class: "btn" %>
 <% end %>
+
+
+
+
+
+
+
+Iframe load detection: 
+
+http://stackoverflow.com/questions/12267010/how-can-i-detect-whether-an-iframe-is-loaded
+
+http://railscasts.com/episodes/328-twitter-bootstrap-basics?autoplay=true
+

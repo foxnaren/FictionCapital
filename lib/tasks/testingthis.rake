@@ -1,11 +1,16 @@
-require 'rubygems'
+
+desc "Used for testing"
+task :testingthis => :environment do
+
+	require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 
-class SeedLightnovelRoyalroadl
-    include Sidekiq::Worker
+perform(0)
 
-    def perform(fictionID)
+end
+
+def perform(fictionID)
 	    ##initialise total_royalroadl_fiction
 	    total_royalroadl_fiction = fictionID+50
 	    # total_royalroadl_fiction = 20
@@ -63,10 +68,10 @@ class SeedLightnovelRoyalroadl
     end
 
     def open_url(url)
+    	puts "#{url}"
         doc = ''
         open(url) do |fi|
             doc = Nokogiri::HTML(fi)
         end
         doc
     end
-end

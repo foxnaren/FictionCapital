@@ -17,12 +17,13 @@ ActiveRecord::Schema.define(version: 20151119235803) do
   enable_extension "plpgsql"
 
   create_table "chapters", force: :cascade do |t|
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "lightnovel_id",  null: false
-    t.string   "chapter_name",   null: false
-    t.integer  "chapter_number", null: false
-    t.string   "chapter_url",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "lightnovel_id",   null: false
+    t.string   "lightnovel_name", null: false
+    t.string   "chapter_name",    null: false
+    t.integer  "chapter_number",  null: false
+    t.string   "chapter_url",     null: false
     t.string   "raws_url"
   end
 
@@ -58,7 +59,7 @@ ActiveRecord::Schema.define(version: 20151119235803) do
     t.boolean  "is_translated",         default: false
     t.string   "raws_url"
     t.integer  "number_of_chapters",    default: 0
-    t.datetime "last_modified",         default: '2015-11-20 00:06:05'
+    t.datetime "last_modified",         default: '2015-11-22 22:53:54'
     t.string   "selector_next_chapter",                                 null: false
     t.string   "selector_name",                                         null: false
     t.string   "lightnovel_type",                                       null: false
@@ -68,13 +69,15 @@ ActiveRecord::Schema.define(version: 20151119235803) do
   add_index "lightnovels", ["name"], name: "index_lightnovels_on_name", using: :btree
 
   create_table "unreads", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "user_id"
     t.integer  "chapter_id"
+    t.string   "lightnovel_name"
   end
 
   add_index "unreads", ["chapter_id"], name: "index_unreads_on_chapter_id", using: :btree
+  add_index "unreads", ["lightnovel_name"], name: "index_unreads_on_lightnovel_name", using: :btree
   add_index "unreads", ["user_id", "chapter_id"], name: "index_unreads_on_user_id_and_chapter_id", unique: true, using: :btree
   add_index "unreads", ["user_id"], name: "index_unreads_on_user_id", using: :btree
 
