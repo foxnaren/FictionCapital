@@ -1,4 +1,8 @@
-<div class = "container">
-	<a class="notice"><%= notice %></a>
-	<a class="alert"><%= alert %></a>
-</div>
+<%if notice || alert %>
+	<div class = "container">
+		<div class = "text-center">
+			<a class="notice"><%= notice %></a>
+			<a class="alert"><%= alert %></a>
+		</div>
+	</div>
+<% end %>
