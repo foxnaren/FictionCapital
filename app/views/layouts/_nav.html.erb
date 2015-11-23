@@ -1,24 +1,17 @@
-<div class="container">
-  <ul class = "nav nav-tabs">
-      <li><%= link_to 'Home', home_path %></li>
-      <li><%= link_to 'Index', lightnovels_path %></li>
-      <li><%= link_to 'Followed Items', followed_path %></li>
-      <li> <%= link_to "#{@all_unread_count} Unread", unreads_path %></li>
-      <li>
-        <%= form_tag lightnovels_path, :method => 'get' do %>
-      		 <p>
-        		<%= text_field_tag :search, params[:search] %>
-        		<%= submit_tag "Search", :name => nil %>
-      		</p>
-    		<% end %>
-    		</li>
-      <li>  
-        <% if user_signed_in? %>
-          Signed in as <%= current_user.email %>. Not you?
-          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-        <% else %>
-          <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-        <% end %>
-        </li>
-  </ul>
+<div class = "container">
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <a class="navbar-brand" href="/home">FictionCapital</a>
+      </div>
+      <ul class = "nav nav-tabs">
+          <li><%= link_to 'Home', home_path %></li>
+          <li><%= link_to 'Index', lightnovels_path %></li>
+          <li><%= link_to 'Followed Items', followed_path %></li>
+          <li> <%= link_to "#{@all_unread_count} Unread", unreads_path %></li>
+          <li><%= render 'layouts/search' %></li>
+          <li><%= render 'layouts/signedin' %></li>
+      </ul>
+    </div>
+  </div>
 </div>
+
