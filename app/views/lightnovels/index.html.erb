@@ -23,6 +23,7 @@
               <tr>
                 <td><%= link_to "#{lightnovel.name}", lightnovel %></td>
                 <td><%= lightnovel.number_of_chapters %></td>
+                <!-- <td><%= lightnovel.id %></td> -->
                 <td><%= lightnovel.lightnovel_type %></td>
                 <td>
                     <% if current_user.lightnovels.find_by(id: lightnovel.id).nil? %>
