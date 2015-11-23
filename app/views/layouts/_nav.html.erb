@@ -16,7 +16,7 @@
         <li><%= link_to 'Home', home_path %></li>
         <li><%= link_to 'Index', lightnovels_path %></li>
         <li><%= link_to 'Followed Items', followed_path %></li>
-        <li><%= link_to "#{@all_unread_count} Unread", unreads_path %></li>   
+        <li id = "button_5_px"><div class = 'btn btn-large btn-primary'><%= link_to "Unread", unreads_path, id: "button_unread" %> <span class="badge"><%= @all_unread_count %></span></div></li>
       </ul>
       <%= render 'layouts/search' %> 
       <%= render 'layouts/user_header' %> 

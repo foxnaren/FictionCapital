@@ -1,77 +1,88 @@
-<div class="jumbotron">
-  <% if user_signed_in? %>
-    <h1>Welcome back, trusted user!</h1>
-    <p class="lead">
-      You have signed in!  If this were a real app some sweet conent
-      would go here.  But it's just a test.  You might want to sign out now.
-    </p>
-    <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-large btn-danger' %>
-  <% else %>
-    <h1>Welcome, new user!</h1>
-    <p class="lead">
-      You must sign in or sign up before you can access our super sweet,
-      top secret content.
-    </p>
-    <div class="row-fluid">
-      <div class="span6">
-        <%= link_to "Sign In", new_user_session_path, :class => "btn btn-success" %>
-      </div>
-      <div class="span6">
-        <%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-success" %>
-      </div>
+<div class = "row">
+    <div class="jumbotron">
+      <% if user_signed_in? %>
+        <h1>Welcome back,</h1>
+        <p class="lead">
+            <% if @all_unread_count == 0 %>
+                You are all caught up! Follow more novels! Here are some suggestions from me:
+            <% else %>
+                You have <%= @all_unread_count %> chapters waiting for you. <%= link_to "Start Reading", unreads_path %>
+            <% end %>
+        </p>
+      <% else %>
+        <h1>Welcome, Stranger!</h1>
+        <p class="lead">
+          You must sign in or sign before you can access our super sweet,
+          top secret content.
+        </p>
+        <div class="row">
+          <div class="span6">
+            <%= link_to "Sign In", new_user_session_path, :class => "btn btn-success" %> <%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-success" %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
 </div>
-
-<p>Welcome <%= current_user.email %></p>
-
-<h2>Latest Additions:</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Latest Additons</th>
-            <th>Follow/Unfollow</th>
-            <th colspan="3"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @latest_lightnovels.each do |lightnovel| %>
-            <tr>
-                <td><%= link_to "#{lightnovel.name}", lightnovel %></td>
-                <td>
-                    <% if current_user.lightnovels.find_by(id: lightnovel.id).nil? %>
-                        <%= link_to 'Follow', follow_lightnovel_path(id: lightnovel.id, anchor: "home_new_lightnovel_#{lightnovel.id}") %>
-                    <% else %>
-                        <%= link_to 'Un-follow', unfollow_lightnovel_path(id: lightnovel.id, anchor: "home_new_lightnovel_#{lightnovel.id}") %>            
-                    <% end %>
-                    </td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
-
-<h2>Latest Chapters:</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>New Chapters</th>
-            <th colspan="3"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @latest_chapters.each do |chapter| %>
-            <tr>
-                <td><%= link_to "#{chapter.lightnovel_name}", lightnovel_path(id: chapter.lightnovel_id) %></td>
-                <td><%= link_to "#{chapter.chapter_name}", render_chapter_path(chapter_url: chapter.chapter_url) %></td>
-                <td>
-                    <% if current_user.lightnovels.find_by(id: chapter.lightnovel_id).nil? %>                
-                        <%= link_to 'Follow', follow_lightnovel_path(id: chapter.lightnovel_id, anchor: "home_new_chapter_#{chapter.lightnovel_id}") %>
-                    <% else %>
-                        <%= link_to 'Un-follow', unfollow_lightnovel_path(id: chapter.lightnovel_id, anchor: "home_new_chapter_#{chapter.lightnovel_id}") %>                         
-                    <% end %>
-                    </td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+<div class = "row">
+    <div class = "col-sm-4">
+        <h2>Latest Additions:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Latest Additons</th>
+        
+                    <th colspan="3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @latest_lightnovels.each do |lightnovel| %>
+                    <tr>
+                        <td><%= link_to "#{lightnovel.name}", lightnovel %></td>
+                        <td>
+                            <%if current_user.blank?%>
+                            
+                            <%else%>
+                                <% if current_user.lightnovels.find_by(id: lightnovel.id).nil? %>
+                                    <%= link_to 'Follow', follow_lightnovel_path(id: lightnovel.id, anchor: "home_new_lightnovel_#{lightnovel.id}") %>
+                                <% else %>
+                                    <%= link_to 'Un-follow', unfollow_lightnovel_path(id: lightnovel.id, anchor: "home_new_lightnovel_#{lightnovel.id}") %>            
+                                <% end %>
+                            <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+   <div class = "col-sm-7">     
+        <h2>Latest Chapters:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>New Chapters</th>
+                    <th colspan="3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @latest_chapters.each do |chapter| %>
+                    <tr>
+                        <td><%= link_to "#{chapter.lightnovel_name}", lightnovel_path(id: chapter.lightnovel_id) %></td>
+                        <td><%= link_to "#{chapter.chapter_name}", render_chapter_path(chapter_url: chapter.chapter_url) %></td>
+                        <td>
+                            <%if current_user.blank?%>
+                            
+                            <%else%>
+                                <% if current_user.lightnovels.find_by(id: chapter.lightnovel_id).nil? %>                
+                                    <%= link_to 'Follow', follow_lightnovel_path(id: chapter.lightnovel_id, anchor: "home_new_chapter_#{chapter.lightnovel_id}") %>
+                                <% else %>
+                                    <%= link_to 'Un-follow', unfollow_lightnovel_path(id: chapter.lightnovel_id, anchor: "home_new_chapter_#{chapter.lightnovel_id}") %>                         
+                                <% end %>
+                            <% end %>
+                            </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>    

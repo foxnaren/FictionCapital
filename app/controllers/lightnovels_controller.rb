@@ -1,6 +1,6 @@
 class LightnovelsController < ApplicationController
 
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: [:home]
 	# before_action :set_user
 	# :edit,
 	before_action :set_lightnovel, only: [:show, :update, :destroy, :follow, :unfollow]
@@ -124,9 +124,11 @@ class LightnovelsController < ApplicationController
 		end
 
 		def set_unread_count
-			@all_unread = current_user.chapters.order(lightnovel_name: :desc, chapter_number: :asc).paginate(:per_page => 20, :page => params[:page])
+			if user_signed_in?
+				@all_unread = current_user.chapters.order(lightnovel_name: :desc, chapter_number: :asc).paginate(:per_page => 20, :page => params[:page])
 			# @all_unread_first = @all_unread.first
-			@all_unread_count = @all_unread.count
+				@all_unread_count = @all_unread.count
+			end
 		end
 		
 		def check_follow

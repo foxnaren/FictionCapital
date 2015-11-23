@@ -1,7 +1,15 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
-
-body { padding-top: 70px; }	
-#user_sign_status {padding-top: 5px;}
-
+#body_with_alert{ padding-top: 40px; }	
+#body_without_alert{ padding-top: 110px; }	
 @import "bootstrap";
+
+#user_sign_status {padding-top: 5px;}
+#button_5_px{
+    padding-top: 5px;
+    text-decoration: none;
+
+}
+#button_unread{
+        color: white;
+}
