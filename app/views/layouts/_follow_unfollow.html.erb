@@ -1,0 +1,8 @@
+ <% unless current_user.blank?%>
+     
+    <% if current_user.lightnovels.find_by(id: lightnovel_id).nil? %>
+        <%= link_to 'Follow', follow_lightnovel_path(id: lightnovel_id, anchor: "follow_#{lightnovel_id}"), class: "btn btn-success" %>
+    <% else %>
+        <%= link_to 'Un-follow', unfollow_lightnovel_path(id: lightnovel_id, anchor: "unfollow_#{lightnovel_id}"), class: "btn btn-danger" %>            
+    <% end %>
+<% end %>

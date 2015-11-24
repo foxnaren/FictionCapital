@@ -1,7 +1,7 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
-#body_with_alert{ padding-top: 40px; }	
-#body_without_alert{ padding-top: 110px; }	
+#body_with_alert{ padding-top: 60px; }	
+#body_without_alert{ padding-top: 140px; }	
 @import "bootstrap";
 
 #user_sign_status {padding-top: 5px;}
@@ -11,6 +11,22 @@
 }
 #button_unread{
         color: white;
+}
+
+#inline, h2 {
+  display: inline;
+}
+
+.jumbotron {
+    // margin-bottom: 0px;
+    // background-image: url(../img/jumbotronbackground.jpg);
+    background-color: #d9d9d9;
+    // #6699ff #339933
+    // background-position: 0% 25%;
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    color: #000000;
+    text-shadow: #999999 0.3em 0.3em 0.3em;
 }
 
 /* User sign in and sign forms. */
