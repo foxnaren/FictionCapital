@@ -1,5 +1,12 @@
 <div class="navbar-form navbar-right" role="search">
+  <div class="col-lg-10">
 	<%= form_tag lightnovels_path, :method => 'get' do %>
-	  		<%= text_field_tag :search, params[:search] %> <%= submit_tag "Search", :name => nil %>
+	    <div class="input-group">
+	    	<%= text_field_tag :search, params[:search], :class => "form-control" %> 
+	  		<span class="input-group-btn">
+	  			<%= submit_tag "Search", :name => nil, :class => "btn btn-default" %>
+	  		</span>
+	  	</div>
 	<% end %>
+	</div>
 </div>
