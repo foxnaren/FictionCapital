@@ -16,13 +16,9 @@
 #inline, h2 {
   display: inline;
 }
-#inline, h2 {
-  display: inline;
-}
 .row {
   display: inline;
 }
-
 
 .jumbotron {
     // margin-bottom: 0px;
@@ -35,6 +31,8 @@
     color: #000000;
     text-shadow: #999999 0.3em 0.3em 0.3em;
 }
+.lead, h2 {display: inline;}
+#red {color: red;}
 
 /* User sign in and sign forms. */
 .border-form-div {
