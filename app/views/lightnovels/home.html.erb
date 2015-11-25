@@ -31,11 +31,11 @@
     </div>
     <div class = "row">
         <div class = "col-sm-3">
-            <div class="panel panel-primary">
+            <div class="panel panel-primary table-responsive">
                 <div class="panel-heading">
                     <h3>Latest Additions:</h3>
                 </div>
-                <table class="table well">
+                <table class="table table-hover table-condensed">
                     <tbody>
                         <% @latest_lightnovels.each do |lightnovel| %>
                             <tr>
@@ -49,12 +49,12 @@
                 </table>
             </div>
         </div>
-       <div class = "col-sm-4">  
-            <div class="panel panel-primary">  
+        <div class = "col-sm-5">  
+            <div class="panel panel-primary table-responsive">  
                 <div class="panel-heading">
                     <h3>Latest Chapters:</h3>
                 </div>
-                <table class="table well">
+                <table class="table table-hover table-condensed">
 <!--                     <thead>
                         <tr>
                             <th>Name</th>
@@ -76,6 +76,25 @@
                 </table>
             </div>
         </div>
+        <div class = "col-sm-4">
+            <div class="panel panel-primary table-responsive">
+                <div class="panel-heading">
+                    <h3>Most Rated/Visited:</h3>
+                </div>
+                <table class="table table-hover table-condensed">
+                    <tbody>
+                        <% @latest_lightnovels.each do |lightnovel| %>
+                            <tr>
+                                <td><%= link_to "#{lightnovel.name}", lightnovel %></td>
+                                <td>
+                                    <%= render "layouts/follow_unfollow", lightnovel_id: lightnovel %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>    
     </div>    
 </div> 
 
