@@ -6,14 +6,20 @@
 
 #user_sign_status {padding-top: 5px;}
 #button_5_px{
-    padding-top: 7px;
+    padding-top: 5px;
 
+}
+#button_10_px{
+  padding-top: 10px;
 }
 #button_unread{
         color: white;
 }
 
 #inline, h2 {
+  display: inline;
+}
+#inline {
   display: inline;
 }
 .row {

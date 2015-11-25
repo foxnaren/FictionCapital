@@ -14,6 +14,7 @@ class CreateLightnovels < ActiveRecord::Migration
       t.string :selector_next_chapter, null: false
       t.string :selector_name, null: false
       t.string :lightnovel_type, null: false
+      t.string :status, default: "Ongoing"
     end
     add_index(:lightnovels, :name)
     add_index(:lightnovels, :home_url)
