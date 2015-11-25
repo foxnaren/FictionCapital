@@ -1,31 +1,31 @@
-<div class = "container">
     <div class = "row">
-        <div class="jumbotron">
-          <% if user_signed_in? %>
-            <h1>Welcome back,</h1>
-            <p class="lead">
-                <% if @all_unread_count == 0 %>
-                    You are all caught up! Follow more novels! Here are some suggestions from me:
+        <div class = "cpl-sm-8">
+            <div class="jumbotron">
+                <% if user_signed_in? %>
+                    <h1>Welcome back,</h1>
+                    <p class="lead">
+                        <% if @all_unread_count == 0 %>
+                            You are all caught up! Follow more novels! Here are some suggestions from me:
+                        <% else %>
+                            You have <h2 id = "inline"><span id = "red"> <%= link_to "#{@all_unread_count} chapters", unreads_path -%>  </span></h2>waiting for you.
+                        <% end %>
+                    </p>
                 <% else %>
-                    You have <h2 id = "inline"><span id = "red"> <%= link_to "#{@all_unread_count} chapters", unreads_path -%>  </span></h2>waiting for you.
+                    <h1>Welcome, Stranger!</h1>
+                    <p class="lead">
+                        You must sign in or sign before you can access our super sweet, top secret content.
+                    </p>
+                    <div class="row">
+                        <div class="span6">
+                            <%= link_to "Sign In", new_user_session_path, :class => "btn btn-success" %> <%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-success" %>
+                        </div>
+                    </div>
                 <% end %>
-            </p>
-          <% else %>
-            <h1>Welcome, Stranger!</h1>
-            <p class="lead">
-              You must sign in or sign before you can access our super sweet,
-              top secret content.
-            </p>
-            <div class="row">
-              <div class="span6">
-                <%= link_to "Sign In", new_user_session_path, :class => "btn btn-success" %> <%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-success" %>
-              </div>
             </div>
-          <% end %>
         </div>
     </div>
     <div class = "row">
-        <div class = "col-sm-4">
+        <div class = "col-sm-5">
             <h2>Latest Additions:</h2>
             <table>
                 <thead>
@@ -87,4 +87,3 @@
             </table>
         </div>
     </div>    
-</div>
