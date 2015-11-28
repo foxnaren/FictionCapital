@@ -1,8 +1,8 @@
 <!--<div class = "container">-->
-    <div class = "row">
-        <div class="col-sm-10">
-            <div class="jumbotron">
+    <div class = "row" id = "jumbotron">
+        <div class="col-sm-9">
                 <div class = "container">
+            <div class="jumbotron">
                     <% if user_signed_in? %>
                         <h1>Welcome back,</h1>
                         <p class="lead" id = "inline">
@@ -24,13 +24,13 @@
                 </div>
             </div>
         </div>
-    	<div class="col-sm-2 hidden-xs hidden-sm" id = "mobile">
-        	<h2>Sidebar1</h2>
-    	    <h2>Sidebar2</h2>
+    	<div class="col-sm-3 hidden-xs hidden-sm" id = "mobile">
+        	<h3>Message From Theos:</h3>
+            <p align="justify">Hope you guys find this site useful. Let me know if you find issues by sending an email at <a>fictioncapital@gmail.com</a></p>
  	    </div>
     </div>
     <div class = "row">
-        <div class = "col-sm-3">
+        <div class = "col-sm-4">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3>Latest Additions:</h3>
@@ -49,7 +49,7 @@
                 </table>
             </div>
         </div>
-        <div class = "col-sm-5">  
+        <div class = "col-sm-4">  
             <div class="panel panel-primary">  
                 <div class="panel-heading">
                     <h3>Latest Chapters:</h3>
@@ -65,8 +65,7 @@
                     <tbody>
                         <% @latest_chapters.each do |chapter| %>
                             <tr>
-                                <td><%= link_to "#{chapter.lightnovel_name}", lightnovel_path(id: chapter.lightnovel_id) %></td>
-                                <td><%= link_to "#{chapter.chapter_name}", render_chapter_path(chapter_url: chapter.chapter_url) %></td>
+                                <td><%= link_to "#{chapter.lightnovel_name} - #{chapter.chapter_name}", lightnovel_path(id: chapter.lightnovel_id) %></td>
                                 <td>
                                     <%= render "layouts/follow_unfollow", lightnovel_id: chapter.lightnovel_id %>
                                 </td>

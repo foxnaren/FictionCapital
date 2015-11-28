@@ -1,45 +1,39 @@
 
-
-<h1>Listing All Novels/Manga</h1>
-
-<br/><%= link_to 'New Lightnovel', new_lightnovel_path %>
-
-<br/><%= will_paginate @lightnovels %>
 <% cache @lightnovels do %>
-  <table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Number of Chapters</th>
-            <th>Type</th>        
-            <th>Follow/Un-follow</th>            
-                
-            <th colspan="3"></th>
-        </tr>
-     </thead>   
-     <tbody>
-        <% @lightnovels.each do |lightnovel| %>
+  <div class = "row">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>Index:</h3>
+      </div>
+      <table class="table table-hover table-condensed">
+        <thead>
+            <tr><%= will_paginate @lightnovels %></tr>
+            <tr>
+                <th>Name</th>
+                <th>Number of Chapters</th>
+                <th>Type</th>        
+                <th>Follow/Un-follow</th>            
+                <th colspan="3"></th>
+            </tr>
+        </thead>   
+        <tbody>
+          <% @lightnovels.each do |lightnovel| %>
             <% cache ["single", lightnovel] do %>
               <tr>
                 <td><%= link_to "#{lightnovel.name}", lightnovel %></td>
                 <td><%= lightnovel.number_of_chapters %></td>
-                <!-- <td><%= lightnovel.id %></td> -->
                 <td><%= lightnovel.lightnovel_type %></td>
-                <td>
-                    <% if current_user.lightnovels.find_by(id: lightnovel.id).nil? %>
-                        <%= link_to 'Follow', follow_lightnovel_path(id: lightnovel.id, anchor: "index_lightnovel_#{lightnovel.id}") %>
-                    <% else %>
-                        <%= link_to 'Un-follow', unfollow_lightnovel_path(id: lightnovel.id, anchor: "index_lightnovel_#{lightnovel.id}") %>            
-                    <% end %>
-                    </td>                
-                <!-- <td><%= lightnovel.id %></td>                 -->
-<!--                 <td><%= link_to 'Edit', edit_lightnovel_path(lightnovel) %></td>
-                <td><%= link_to 'Destroy', lightnovel, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+                <td><%= render "layouts/follow_unfollow", lightnovel_id: lightnovel %></td>
               </tr>
             <% end %>
-        <% end %>
-      </tbody>
-  </table>
+          <% end %>
+          <tr>
+            <td><%= will_paginate @lightnovels %></td>
+          </tr> 
+        </tbody>
+      </table>
+    </div>
+  </div>
 <% end %>
 
-<br/><%= will_paginate @lightnovels %>
+

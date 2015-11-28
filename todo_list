@@ -1,12 +1,23 @@
 
+>>> Admin page new <br/><%= link_to 'New Lightnovel', new_lightnovel_path %>
+
+
 >>> Status field in Lightnovel
 >>> View Count and Rating System
+>>> Collapse on mobile
+>>> Latest page
+>>> Latest Chapter
+>>> Most Viwed/ Highest rated
 
 >>> can we pass object through perform? for add_to_unread
 
 
 >>> 1 model - track seeds
->>> follow for users implement
+
+>>> allow user to add to reading list
+>>> add chapters before to reading list
+
+>>> Mark all chapters before this to read
 
 >>> Add number of chapters to all 
 

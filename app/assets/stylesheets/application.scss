@@ -26,10 +26,24 @@
   display: inline;
 }
 
+#mobile {
+  //background-color: #d9d9d9;
+    // border-radius: 15px 50px;
+    border-radius: 15px 0px 30px 5px;
+    background: #ffb74d;
+    padding: 20px;
+    //display: flex;
+
+}
+#jumbotron {
+  display: flex;
+}
+
 .jumbotron {
     // margin-bottom: 0px;
     // background-image: url(../img/jumbotronbackground.jpg);
     background-color: #d9d9d9;
+    // border-radius: 15px 50px;
     // #6699ff #339933
     // background-position: 0% 25%;
     // background-size: cover;
