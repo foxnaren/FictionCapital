@@ -1,44 +1,46 @@
-
-<h1>My Unread Items</h1>
-
-<% if @all_unread.blank? %>
-    <p>You have read. Consider following more Novels or Manga.</p>
-<% else %>
-    <% cache @all_unread do %>
-        <br/><%= will_paginate @all_unread %>
-        <table>
+<div class = "row">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3>My Unread Items</h3>
+        </div>
+        <table class="table table-hover table-condensed">
             <thead>
+                <tr><%= will_paginate @all_unread %></tr>
                 <tr>
                     <th>Added On</th>                
                     <th>Lightnovel Name</th>        
                     <th>Chapter Number</th>                                
                     <th>Chapter Name (Opens in a new tab)</th>
-
-
-
                     <th colspan="3"></th>
                 </tr>
             </thead>
             <tbody>
-                <% @all_unread.each do |unreadchapter| %>
-                    <% cache ["single", unreadchapter] do %>
-                        <tr>
-                            <td><%= unreadchapter.created_at.to_date %></td>      
-                            <td><%= link_to "#{unreadchapter.lightnovel_name}", lightnovel_path(id: unreadchapter.lightnovel_id) %></td>
-                            <td><%= unreadchapter.chapter_number %></td>                                                                          
-                            <td><%= link_to "#{unreadchapter.chapter_name}", render_chapter_path(chapter_url: unreadchapter.chapter_url),target: '_blank' %></td>                  
-
-
-
-
-                            <td><%= link_to "Mark Chapter as Read", mark_as_read_path(id: unreadchapter.id, range: "chapter", anchor: "mark_as_unread_#{unreadchapter.id}") %></td>
-                            <td><%= link_to "Mark All as Read", mark_as_read_path(id: unreadchapter.id, range: "lightnovel", lightnovel_name: unreadchapter.lightnovel_name, anchor: "mark_all_as_unread_#{unreadchapter.id}") %></td>                            
-                            <!--chapter.chapter_url -->
-                        </tr>
+                <% if @all_unread.blank? %>
+                    <tr>
+                        <td>You have read. Consider following more Novels or Manga.</td>
+                    </tr>
+                <% else %>
+                    <% cache @all_unread do %>
+                        <% @all_unread.each do |unreadchapter| %>
+                            <% cache ["single", unreadchapter] do %>
+                                <tr>
+                                    <td><%= unreadchapter.created_at.to_date %></td>      
+                                    <td><%= link_to "#{unreadchapter.lightnovel_name}", lightnovel_path(id: unreadchapter.lightnovel_id) %></td>
+                                    <td><%= unreadchapter.chapter_number %></td>                                                                          
+                                    <td><%= link_to "#{unreadchapter.chapter_name}", render_chapter_path(chapter_url: unreadchapter.chapter_url),target: '_blank' %></td>                  
+                                    <td><%= link_to "Mark Chapter as Read", mark_as_read_path(id: unreadchapter.id, range: "chapter", anchor: "mark_as_unread_#{unreadchapter.id}") %></td>
+                                    <td><%= link_to "Mark All as Read", mark_as_read_path(id: unreadchapter.id, range: "lightnovel", lightnovel_name: unreadchapter.lightnovel_name, anchor: "mark_all_as_unread_#{unreadchapter.id}") %></td>                            
+                                    <!--chapter.chapter_url -->
+                                </tr>
+                            <% end %>
+                        <% end %>
                     <% end %>
                 <% end %>
+                <tr>
+                    <td><%= will_paginate @all_unread %></td>
+                </tr>
             </tbody>
         </table>
-        <br/><%= will_paginate @all_unread %>
-    <% end %>        
-<% end %>
+    </div>
+</div>
+

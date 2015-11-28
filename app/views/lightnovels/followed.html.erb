@@ -1,36 +1,50 @@
-<h1>My Followed Novels/Manga</h1>
-
-<% if @all_followed.blank? %>
-    <p>You have not followed anything.</p>
-<% else %>
-    <% cache @all_followed do %>
-        <table>
-            <thead>
+<div class = "row">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3>My Followed Novels/Manga/Anime:</h3>
+    </div>
+    <table class="table table-hover table-condensed">
+      <thead>
+        <tr><%= will_paginate @all_followed %></tr>
+        <tr>
+          <th>Name</th>
+          <th>Total Number Of Chapters</th>
+          <th>Type</th>
+          <th>Follow/Unfollow</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @all_followed.blank? %>
+          <tr>
+            <td>You have not followed anything.</td>
+          </tr>
+        <% else %>
+          <% cache @all_followed do %>
+            <% @all_followed.each do |lightnovel| %>
+              <% cache ["single", lightnovel] do %>
                 <tr>
-                    <th>Name</th>
-                    <th>Total Number Of Chapters</th>
-                    <th>Type</th>
-                    <th>Follow/Unfollow</th>
-                    <th colspan="3"></th>
+                  <td><%= link_to "#{lightnovel.name}", lightnovel %></td>
+                  <td><%= lightnovel.number_of_chapters %></td>
+                  <td><%= lightnovel.lightnovel_type %></td>
+                  <td>
+                      <%= render "layouts/follow_unfollow", lightnovel_id: lightnovel %>
+                  </td>
+                  <!--chapter.chapter_url -->
+                  <% @previous_lightnovel = lightnovel.id%>
                 </tr>
-            </thead>
-            <tbody>
-                <% @all_followed.each do |lightnovel| %>
-                    <% cache ["single", lightnovel] do %>
-                        <tr>
-                            <td><%= link_to "#{lightnovel.name}", lightnovel %></td>
-                            <td><%= lightnovel.number_of_chapters %></td>
-                            <td><%= lightnovel.lightnovel_type %></td>
-                            <td><%= link_to 'unfollow', unfollow_lightnovel_path(id: lightnovel.id, anchor: "followed_#{@previous_lightnovel}") %></td>
-                            <!--chapter.chapter_url -->
-                            <% @previous_lightnovel = lightnovel.id%>
-                        </tr>
-                    <% end %>
-                <% end %>
-            </tbody>
-        </table>
-    <% end %>        
-<% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <tr>
+          <td><%= will_paginate @all_followed %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
 
 <!--       t.string  :name, null: false

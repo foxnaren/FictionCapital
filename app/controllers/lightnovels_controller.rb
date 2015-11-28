@@ -34,7 +34,7 @@ class LightnovelsController < ApplicationController
 	end
 
 	def followed
-		@all_followed = current_user.lightnovels
+		@all_followed = current_user.lightnovels.order('LOWER(name)').paginate(:per_page => 40, :page => params[:page])
 	end
 
 	def follow
@@ -65,7 +65,7 @@ class LightnovelsController < ApplicationController
 
 	def index
 		logger.debug ">>>>>>>>>>>lightnovel-index<<<<<<<<<<"
-		@lightnovels = Lightnovel.search(params[:search]).order('LOWER(name)').paginate(:per_page => 20, :page => params[:page])
+		@lightnovels = Lightnovel.search(params[:search]).order('LOWER(name)').paginate(:per_page => 40, :page => params[:page])
 	end
 
 	def show
@@ -125,7 +125,7 @@ class LightnovelsController < ApplicationController
 
 		def set_unread_count
 			if user_signed_in?
-				@all_unread = current_user.chapters.order(lightnovel_name: :desc, chapter_number: :asc).paginate(:per_page => 20, :page => params[:page])
+				@all_unread = current_user.chapters.order(lightnovel_name: :desc, chapter_number: :asc).paginate(:per_page => 40, :page => params[:page])
 			# @all_unread_first = @all_unread.first
 				@all_unread_count = @all_unread.count
 			end

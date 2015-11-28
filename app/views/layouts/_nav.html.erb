@@ -10,8 +10,13 @@
           <span class="icon-bar"></span>
         </button>   
         
-        <ul class = "pull-left" id = "button_10_px">
-          <li class = 'btn btn-sm btn-danger pull-left' ><%= link_to "Un-read", unreads_path, id: "button_unread" %> <span class="badge"><%= @all_unread_count %></span></li>
+        <ul class = "pull-left" id = "button_unread_list">
+          <li >
+            <%= link_to unreads_path, id: "button_unread", class: 'btn btn-sm btn-danger pull-left'  do %>
+              Unread
+              <span class="badge"><%= @all_unread_count %></span>
+            <% end %>
+          </li>
         </ul>
     </div>
 
