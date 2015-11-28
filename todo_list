@@ -1,6 +1,8 @@
 
 >>> Admin page new <br/><%= link_to 'New Lightnovel', new_lightnovel_path %>
 
+>>> Delete Selectors?
+
 
 >>> Status field in Lightnovel
 >>> View Count and Rating System

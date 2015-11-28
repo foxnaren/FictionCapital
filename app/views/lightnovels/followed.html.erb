@@ -16,9 +16,11 @@
       </thead>
       <tbody>
         <% if @all_followed.blank? %>
-          <tr>
-            <td>You have not followed anything.</td>
-          </tr>
+          <thead>
+              <tr>
+                  <span id = "all_read">No follows found. Consider following more <%= link_to 'Novels, Manga or Anime', lightnovels_path %> or visit <%= link_to 'Home', home_path %> for the latest updates.</span>
+              </tr>
+          </thead>
         <% else %>
           <% cache @all_followed do %>
             <% @all_followed.each do |lightnovel| %>

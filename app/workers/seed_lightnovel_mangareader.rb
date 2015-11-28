@@ -21,7 +21,7 @@ class SeedLightnovelMangareader
             		description = "None"
         		end
             	number_of_chapters = chapter_doc.css("#listing a").count
-                @lightnovel = Lightnovel.create name: name, description: description, home_url: home_url, number_of_chapters: number_of_chapters, selector_next_chapter: "manga", selector_name: "manga", lightnovel_type: "Manga"
+                @lightnovel = Lightnovel.create name: name, description: description, home_url: home_url, number_of_chapters: number_of_chapters, selector_next_chapter: "Manga", selector_name: "Manga", lightnovel_type: "Manga"
         		chapter_number = 1
         		chapter_doc.css("#listing a").each do |chapter|
             		chapter_name = chapter.text

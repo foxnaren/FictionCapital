@@ -16,9 +16,11 @@
             </thead>
             <tbody>
                 <% if @all_unread.blank? %>
+                <thead>
                     <tr>
-                        <td>You have read. Consider following more Novels or Manga.</td>
+                        <span id = "all_read">You have read all updates. Consider following more <%= link_to 'Novels, Manga or Anime', lightnovels_path %> or visit <%= link_to 'Home', home_path %> for the latest updates.</span>
                     </tr>
+                </thead>
                 <% else %>
                     <% cache @all_unread do %>
                         <% @all_unread.each do |unreadchapter| %>
