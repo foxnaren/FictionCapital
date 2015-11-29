@@ -1,3 +1,5 @@
+>> Initially only enable daily and not hourly
+
 
 >>> Admin page new <br/><%= link_to 'New Lightnovel', new_lightnovel_path %>
 
