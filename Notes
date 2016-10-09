@@ -96,3 +96,12 @@ http://stackoverflow.com/questions/12267010/how-can-i-detect-whether-an-iframe-i
 
 http://railscasts.com/episodes/328-twitter-bootstrap-basics?autoplay=true
 
+Fiction Capital Notes:
+
+
+1) bundle install
+2) rails server, rails s -p $PORT -b $IP
+
+ sudo service postgresql start
+
+3) SSH Key - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgZqfIMnh3IOofrIu1qMZvuZVpJx2BDytLyfiilxrjiczt583wWfBxvLHMxoEveSG14aveXHP2J7dEdRRQtHw84kHfIfWy7aNANzrBrF2IQmIRXXkmoXMTBwTteiI6dk1pSMbpHDufo2T6njy335xvzRuf0NZPdGyBYMHwFkUl2s5JhiUoynV4hvUB27nWaGlWH0RQOFdJcJlViDpnaTK1TB+QloOB6hvYpKFp5ai8HnA7lBf78XXgbZXpcsE2vmxK5J8C1RXyNSnykKvbwL2MeSGhGyU0Dd4xNVjfKSz1OlrJflPJvBhV50TlMVH2Bmti1TCVCiCx7LlB+fAyDSSf foxnaren@gmail.com 
