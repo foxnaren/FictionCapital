@@ -67,6 +67,7 @@ class CheckLatestChapter
                             else
                                 raise e
                             end
+                        end
                     end 
                     # puts "#{next_chapter_link}"
                     ## Populate the next chapter name from the newly opened page
@@ -99,7 +100,7 @@ class CheckLatestChapter
         if @doc.css("#listing a").count > current_chapter_number
             #Loop through all the entries that are not there *** the index starts at 0
            @doc.css("#listing a")[(current_chapter_number) .. (@doc.css("#listing a").count-1)].each do |chapter|
-               #Need to increment since it was not incremented for index starting from 0
+                #Need to increment since it was not incremented for index starting from 0
                 current_chapter_number = current_chapter_number + 1 
                 chapter_name = chapter.text
                 chapter_url = "http://www.mangareader.net" + chapter['href'] 
@@ -157,3 +158,4 @@ class CheckLatestChapter
         @lightnovel.update_attributes(:number_of_chapters => update_chapter_number, :last_modified => Time.now)
     end
 end
+
