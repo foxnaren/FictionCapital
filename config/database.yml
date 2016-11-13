@@ -81,5 +81,6 @@ test:
 production:
   <<: *default
   database: FictionCapital_production
-  username: FictionCapital
-  password: <%= ENV['BLOG_DATABASE_PASSWORD'] %>
+  username: <%= ENV['USERNAME'] %>
+  password: <%= ENV['PASSWORD'] %>
+  host:     <%= ENV['IP'] %>
